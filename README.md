@@ -18,3 +18,12 @@ AVETRA v1.9 • Cabalistic Arti Nama
 - Jumlah langsung dan jumlah per kata, transparan tanpa skor buatan.
 - Penguraian total besar dan persentase positif belum direkonstruksi.
 - Tidak mengubah modul SCS yang sudah ada.
+
+
+## v2.0 Penguraian Arti Nama (eksperimental)
+- Menampilkan penguraian nilai posisi (mis. 222 = 200 + 20 + 2) dan arti setiap komponen.
+- Total >1390 memakai hipotesis pemotongan digit terdepan; belum dikonfirmasi universal.
+- Alternatif penguraian hingga tiga komponen yang ada di tabel; pilihan tidak merekonstruksi algoritma asli.
+- Simulasi persentase = ceil(jumlah makna positif / jumlah makna tersedia × 100); kategori positif/netral/negatif adalah penilaian editorial awal yang bisa diubah per komponen. BUKAN skor situs asli.
+- Tidak mengubah engine SCS/Harani/Match/Partner.
+- Validasi referensi: HITLER 222 -> 200+20+2; SUHARTO 529 -> 500+20+9; JONI 699 -> 600+90+9. Angka persentase referensi situs belum direplikasi.
