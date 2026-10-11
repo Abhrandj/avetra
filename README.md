@@ -11,3 +11,10 @@ Unggah semua file ZIP ke root repository GitHub Pages, menimpa file lama.
 
 Jika iPhone masih menampilkan tampilan lama, tutup tab Safari lalu buka kembali dan refresh.
 Interpretasi numerologi adalah deskripsi metode historis, bukan prediksi ilmiah.
+
+AVETRA v1.9 • Cabalistic Arti Nama
+- Tab baru Arti Nama, pembaruan otomatis saat mengetik.
+- Tabel huruf historis dan makna terpisah dari mesin Platinum.
+- Jumlah langsung dan jumlah per kata, transparan tanpa skor buatan.
+- Penguraian total besar dan persentase positif belum direkonstruksi.
+- Tidak mengubah modul SCS yang sudah ada.
