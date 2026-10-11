@@ -1,15 +1,13 @@
-# AVETRA Name Intelligence v1.1
+# AVETRA v1.2 • GitHub Pages
 
-Upload all files from this ZIP to the **root** of your GitHub `avetra` repository. In Settings > Pages choose `main` and `/ (root)`.
+Update seluruh file di root repository GitHub `avetra` (jangan unggah folder pembungkus). Aktifkan Pages pada branch `main`, folder `/ (root)`.
 
-## Changes
-- BrandName single-name calculation and **compare up to 25 candidates** with CSV export.
-- Improved iPhone Safari date input visibility.
-- Inputs preserved in session while switching tabs.
-- Personal preliminary metrics.
-- Life Map dynamic computation is not yet implemented; the interface does not fabricate results.
+## Baru di v1.2
+- Personal: Besar dan Kecil, Catur reduced, rincian AR per kata dan langkah hitung.
+- Perbaikan siklus pengulangan nama pendek pada Harani.
+- BrandName: fitur v1.1 dipertahankan.
 
-## Updating an existing GitHub Pages site
-Replace the existing files in the repository with all the files from this ZIP. GitHub Pages may take a few minutes to deploy. Reload Safari afterward.
-
-Reconstructed numerology is not scientifically validated and is not a prediction of future events.
+## Batasan
+- Synchronicity `hitunginName` belum dipindahkan ke JavaScript, sehingga tidak ditampilkan sebagai skor jadi.
+- Vitranta 100 tahun untuk nama bebas belum tersedia.
+- Metode numerologi tidak memiliki validasi ilmiah untuk memprediksi nasib.
