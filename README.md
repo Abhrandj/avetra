@@ -1,14 +1,8 @@
-# AVETRA v1.5 | GitHub Pages
+AVETRA v1.7 • SCS Match & Partner
 
-Upload all files from this folder to the existing `avetra` repository root, replacing older files.
+Upload seluruh isi ZIP ke root GitHub Pages.
 
-New: automatic 100-year Vitranta values from a name, using a JavaScript port of the original Platinum Java bytecode. Automatic Synergy, Productive, Momentum, interactive timeline. Up to nine name components. Manual array entry remains as optional audit mode.
-
-Golden tests:
-- ZOVIEL RIANGGIWARNI JOOSTENSZ SONGUHBUN: S88 P91 MS1.36875
-- ANGGICA: S100 P100 MS0.8875
-- ABHRAND PRAZESKANA JOHANDA: S94 P96 MS1.625
-
-Original Java reads birth year but does not use it for numeric Vitranta computation. Date sets calendar-year labels; other Platinum calculations use date.
-
-Numerology outputs are not verified predictions of events.
+Match v1.1.0: matriks Time Male × Female, same-sex 0% override, Coherence tidak menentukan skor.
+Partner v1.0.0: matriks HIGH jika salah satu Coherence >=0.6, selain itu LOW.
+Sumber: dua Calculation Manual Reconstructed yang dilampirkan pengguna.
+Skor historis/simbolik, bukan prediksi ilmiah.
