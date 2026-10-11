@@ -1,0 +1,28 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071018"><link rel="manifest" href="manifest.webmanifest"><title>AVETRA | Name Intelligence</title><style>
+:root{--bg:#071018;--card:#0e1b26;--line:#223748;--ink:#eef7ff;--muted:#8ea6b8;--accent:#62d6ff;--good:#74e0a1;--warn:#ffcc66}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 20% 0,#123149 0,#071018 40%);color:var(--ink)}
+.wrap{max-width:980px;margin:auto;padding:22px} header{padding:28px 0 18px} h1{font-size:clamp(28px,5vw,48px);margin:0;letter-spacing:-1.5px} .sub{color:var(--muted);margin-top:8px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:8px 0 18px} button,.tab{border:1px solid var(--line);background:#0b1721;color:var(--ink);padding:11px 14px;border-radius:12px;cursor:pointer;font-weight:700}
+.tab.active{background:var(--accent);color:#00131b} .panel{display:none} .panel.active{display:block}
+.card{background:rgba(14,27,38,.92);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 16px 50px rgba(0,0,0,.18)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px} @media(max-width:650px){.grid{grid-template-columns:1fr}}
+label{display:block;color:var(--muted);font-size:12px;margin:0 0 6px} input,select{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#08131c;color:var(--ink);font-size:16px}
+.go{background:var(--accent);color:#00131b;border:0;margin-top:14px} .result{font-size:28px;font-weight:850;margin:4px 0} .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px} @media(max-width:600px){.metrics{grid-template-columns:1fr 1fr}}
+.metric{background:#09151e;border:1px solid var(--line);padding:12px;border-radius:12px} .metric b{display:block;font-size:20px;margin-top:4px} small,.note{color:var(--muted)} details{margin-top:12px} code{white-space:pre-wrap;color:#b9eaff} .badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#123348;color:#8fe3ff;font-size:11px;font-weight:800}
+footer{color:var(--muted);font-size:12px;padding:25px 0 40px}
+
+body{min-height:100vh} .wrap{max-width:1080px}.tabs{flex-wrap:wrap;overflow:visible}
+.pill{display:inline-block;background:#123348;padding:5px 9px;border-radius:8px;color:#8fe3ff}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+#lifechart{width:100%;height:auto;min-width:650px}.chartwrap{overflow-x:auto}
+.chartgrid{stroke:#345064;stroke-width:1}.charttext{fill:#9bb5c5;font:12px system-ui}
+#timeline{width:100%;accent-color:#62d6ff}.warning{color:#ffcc66}
+button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible{outline:2px solid #ffcc66}
+</style></head><body><div class="wrap">
+<header><span class="badge">AVETRA • NAME INTELLIGENCE</span><h1>AVETRA <span style="color:#62d6ff">✦</span></h1><p class="sub">Personal, BrandName & Vitranta research tools. Mulai dengan memasukkan nama.</p></header>
+<div class="tabs"><button class="tab active" data-tab="personal">Personal / Platinum</button><button class="tab" data-tab="brand">BrandName</button><button class="tab" data-tab="lifemap">Vitranta Life Map</button></div>
+<section id="personal" class="panel active"><div class="card"><h2>Personal Analysis</h2><div class="grid"><div><label for="pname">Nama lengkap atau nama panggilan</label><input id="pname" autocomplete="off" placeholder="Ketik nama"></div><div><label for="pdob">Tanggal lahir</label><input id="pdob" type="date"></div><div><label for="psex">Jenis kelamin / jenis entitas</label><select id="psex"><option value="0">Male</option><option value="1">Female</option><option value="2">Company</option><option value="3">Country</option></select></div></div><button class="go" id="pcalc">Hitung Personal</button></div><div id="pout"></div></section>
+<section id="brand" class="panel"><div class="card"><h2>BrandName Analysis</h2><div class="grid"><div><label for="bname">Nama brand</label><input id="bname" autocomplete="off" placeholder="Ketik nama brand"></div><div><label for="btype">Kategori bisnis</label><select id="btype"></select></div></div><button class="go" id="bcalc">Hitung Brand</button></div><div id="bout"></div></section>
+<section id="lifemap" class="panel"><div class="card"><h2>Vitranta Life Map</h2><div class="grid"><div><label for="lname">Nama</label><input id="lname" placeholder="Ketik nama"></div><div><label for="ldob">Tanggal lahir</label><input id="ldob" type="date"></div></div><button class="go" id="lcalc">Hitung Life Map</button><p class="note">Versi ini menyiapkan antarmuka grafik, tetapi belum menghasilkan Vitranta untuk nama baru. Mesin temporal Java lama masih perlu dipindahkan dan diuji ke JavaScript. Tidak ada data contoh atau angka buatan.</p></div><div id="lout"></div></section>
+<footer>AVETRA menggunakan rekonstruksi metode SCS lama. Hasil numerologi bukan prediksi ilmiah tentang karakter, kesehatan, karier, atau nasib.</footer>
+</div><script src="brand-engine.js"></script><script src="app.js"></script><script>if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});</script></body></html>
