@@ -1,17 +1,15 @@
-# AVETRA | Name Intelligence
+# AVETRA Name Intelligence v1.1
 
-Web app statis untuk GitHub Pages. Tidak perlu domain atau server.
+Upload all files from this ZIP to the **root** of your GitHub `avetra` repository. In Settings > Pages choose `main` and `/ (root)`.
 
-## Pasang di GitHub
-1. Buat repository **avetra** dengan visibility **Public**.
-2. Upload **isi folder ini** langsung ke root repository (bukan folder pembungkus).
-3. Buka **Settings → Pages → Build and deployment → Deploy from a branch**.
-4. Pilih **main** dan **/(root)**, lalu **Save**.
-5. Kunjungi `https://USERNAME.github.io/avetra/`.
+## Changes
+- BrandName single-name calculation and **compare up to 25 candidates** with CSV export.
+- Improved iPhone Safari date input visibility.
+- Inputs preserved in session while switching tabs.
+- Personal preliminary metrics.
+- Life Map dynamic computation is not yet implemented; the interface does not fabricate results.
 
-## Status fitur
-- Personal: kalkulator parsial, beberapa metrik belum diaktifkan.
-- BrandName: kalkulator rekonstruksi v1.1.2; validasi silang masih diperlukan.
-- Vitranta Life Map: input tersedia, perhitungan dinamis belum tersedia.
+## Updating an existing GitHub Pages site
+Replace the existing files in the repository with all the files from this ZIP. GitHub Pages may take a few minutes to deploy. Reload Safari afterward.
 
-Tidak ada data nama pribadi yang dikirim ke server oleh aplikasi statis ini.
+Reconstructed numerology is not scientifically validated and is not a prediction of future events.
