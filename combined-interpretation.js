@@ -21,21 +21,16 @@ function build(r){
    'Ada '+signals.length+' indikator perhatian. Ini tidak mengubah klasifikasi dasar Harani dan bukan ukuran risiko kejadian nyata.':
    'Tidak ada indikator perhatian dari tiga pemeriksaan yang tersedia. Ini bukan jaminan hasil kehidupan.';
  const html=`<div class="card combined-reading" id="combinedReading">
- <h2>Pembacaan Gabungan · ${safe(r.n)}</h2>
- <p class="note">AVETRA v2.3 · Interpretasi simbolik SCS berdasarkan kamus tahap 1. Bukan penilaian medis, prediksi, atau fakta kausal.</p>
- <div class="reading-block"><h3>1. Klasifikasi dasar</h3>
- <p><b>Harani ${safe(r.h)}:</b> ${h?safe(h.status_dasar):'belum terdokumentasi'}. ${h?'Fase pendek: '+safe(h.fase_pendek)+'. Fase panjang: '+safe(h.fase_panjang)+'.':''}</p>
- <p><b>Acoustic Root ${safe(r.a)}:</b> ${a?safe(a.arti):'Belum tersedia'}.</p>
- <p><b>Time ${safe(r.t)}:</b> ${t?safe(t.kekuatan)+'; tantangan: '+safe(t.tantangan):'Belum tersedia'}.</p></div>
- <div class="reading-block"><h3>2. Indikator pendukung</h3>
- <ul>${line('Synchronicity',r.sv+' (ambang dasar ≥ 0,8)')}${line('Coherence',r.cv+' (ambang dasar ≥ 0,7)')}${line('Obstacle 3',o?'O:3 terdeteksi':'Tidak terdeteksi')}</ul></div>
- <div class="reading-block"><h3>3. Pembacaan lintas indikator</h3>
- ${strengths.length?'<p><b>Aspek pendukung:</b></p><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
- ${signals.length?'<p><b>Indikator perhatian:</b></p><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p>Belum ada indikator perhatian dari pemeriksaan SV, CV, dan O:3.</p>'}
- <p><b>Kesimpulan terbatas:</b> ${safe(conclusion)}</p></div>
- <details><summary>Dasar pembacaan & keterbatasan</summary>
- <p class="note">Klasifikasi Harani bersifat dasar. SV/CV dibandingkan dengan ambang sumber. O:3 ditentukan dari Kecil = 3. Aturan otomatis untuk mengubah Harani positif menjadi negatif belum terverifikasi. Penyebutan cedera, kehilangan anggota tubuh, penyakit atau kematian dalam tulisan historis tidak dapat digunakan sebagai ramalan.</p>
- <p><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p></details>
+ <h2>Ringkasan Interpretasi · ${safe(r.n)}</h2>
+ <p class="note">Pembacaan simbolik berdasarkan metode SCS, bukan prediksi ilmiah.</p>
+ <div class="reading-status"><span>Harani <b>${safe(r.h)}</b> · ${h?safe(h.status_dasar):'belum terdokumentasi'}</span><span>SV <b>${safe(r.sv)}</b></span><span>CV <b>${safe(r.cv)}</b></span><span>Obstacle <b>${o?'O:3':'Tidak ada O:3'}</b></span></div>
+ <h3>Gambaran struktur</h3>
+ <p>${h?'Harani: '+safe(h.fase_pendek)+'. ':''}${a?'Acoustic Root: '+safe(a.arti)+'. ':''}${t?'Time: '+safe(t.kekuatan)+'.':''}</p>
+ ${strengths.length?'<h3>Aspek pendukung</h3><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
+ ${signals.length?'<h3>Indikator perhatian</h3><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p><b>Indikator perhatian:</b> tidak ditemukan pada SV, CV, dan O:3 yang diperiksa.</p>'}
+ <p class="note">${safe(conclusion)}</p>
+ <details class="deep-analysis"><summary>Analisis Mendalam · buka rincian lengkap</summary><div id="avetraDeepContent"></div></details>
+ <p class="note"><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand Bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p>
  </div>`;
  return html;
 }
@@ -47,7 +42,16 @@ function run(){
  const besar=red(a+t,[11,13,14,16]),kecil=red(Math.abs((a===22?4:a)-t));
  const sv=synchronicity(besar,kecil,c,sex===3?1:sex),cv=cohPersonal(c,sex===3?1:sex);
  const output=document.getElementById('pout');
- output.insertAdjacentHTML('beforeend',build({n:name,a,t,h,kecil,sv,cv}));
+ const previous=Array.from(output.children);
+ output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,sv,cv}));
+ const deep=document.getElementById('avetraDeepContent');
+ if(deep){
+  previous.forEach((node,i)=>{
+   if(i===0){const heading=document.createElement('h3');heading.textContent='Hasil Perhitungan Personal';deep.appendChild(heading);}
+   if(i===1){const heading=document.createElement('h3');heading.textContent='Arti Struktur Nama dan FMEI';deep.appendChild(heading);}
+   deep.appendChild(node);
+  });
+ }
 }
 const btn=document.getElementById('pcalc');
 if(btn)btn.addEventListener('click',run);

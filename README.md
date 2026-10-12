@@ -62,3 +62,7 @@ Tab Kamus SCS berisi 11 Harani, 12 Acoustic Root, 9 Time, ambang Synchronicity/C
 
 ## v2.3 Interpretation Engine (Tahap 2)
 Laporan gabungan di Personal otomatis setelah Hitung Personal. Menunjukkan klasifikasi Harani dasar, A.R., Time, ambang SV/CV, O:3, kekuatan dan indikator perhatian. Tidak mengubah nilai Harani karena indikator merah. Rujukan disertakan. Link sumber berwarna cyan. Semua proses lokal dan offline.
+
+
+## v2.4 Laporan Terpadu Mobile
+Ringkasan Interpretasi ditampilkan lebih dulu. Analisis Mendalam dapat dibuka untuk menampilkan hasil numerik, rumus, arti struktur, FMEI dan sumber tanpa pengulangan di layar utama. Tidak ada perubahan algoritma SCS.
