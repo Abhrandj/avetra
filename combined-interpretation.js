@@ -34,9 +34,9 @@ function build(r){
  const interpretHtml=`<section class="reading-block platinum-reading">
  <h3>Pembacaan Gabungan Platinum</h3>
  <p><b>Harani ${safe(r.h)}</b> memiliki klasifikasi dasar ${h?safe(h.status_dasar):'belum terdokumentasi'} dalam kamus yang tersedia. Klasifikasi dasar tidak berubah otomatis karena nilai indikator lain.</p>
- <h4>Synergy, Productive & Momentum</h4>
+ <details class="method-details"><summary>Rincian Synergy, Productive & Momentum</summary>
  ${pNotes.length?'<ul>'+pNotes.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p>Hasil agregat belum tersedia untuk nama ini.</p>'}
- <h4>Hubungan indikator</h4><ul>${cNotes.map(x=>'<li>'+safe(x)+'</li>').join('')}</ul>
+ </details><details class="method-details"><summary>Hubungan indikator dan c.i</summary><ul>${cNotes.map(x=>'<li>'+safe(x)+'</li>').join('')}</ul></details>
  <p><b>Indikator perhatian terdeteksi:</b> ${safe(String(signals.length))} dari SV, CV dan O:3 yang diperiksa. ${signals.length?'Perlu dibaca bersama klasifikasi dasar, bukan sebagai ramalan.':'Tidak ada sinyal perhatian pada tiga pemeriksaan tersebut; bukan berarti semua aspek kehidupan bebas tantangan.'}</p>
  <details><summary>Metode dan batas interpretasi</summary><p>Synergy menghitung jumlah 100 nilai Vitranta yang tidak termasuk 11, 13, dan 19. Productive memakai posisi 22–81 (60 nilai), dibulatkan ke bawah. Momentum memakai bobot pada posisi 19–58 (40 nilai). Ketiganya hasil rekonstruksi yang cocok pada sejumlah sampel historis, belum tervalidasi secara independen sebagai model prediksi.</p><p>Angka dan simbol tidak dapat digunakan untuk menyimpulkan moralitas, penyakit, kecelakaan, kematian, atau kepastian karier seseorang.</p></details>
  </section>`;
@@ -72,7 +72,7 @@ function build(r){
  ${signals.length?'<h3>Indikator perhatian</h3><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p><b>Indikator perhatian:</b> tidak ditemukan pada SV, CV, dan O:3 yang diperiksa.</p>'}
 
  </details>
- <details class="deep-analysis"><summary>Analisis Mendalam · langkah perhitungan dan FMEI</summary><div id="avetraDeepContent"></div></details>
+ <details class="deep-analysis"><summary>Analisis Mendalam · perhitungan dan FMEI</summary><div id="avetraDeepContent"></div></details>
  <p class="note"><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand Bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p>
  </div>`;
  return html;
@@ -84,24 +84,32 @@ function run(){
  const m=personalMetrics(name,date,sex);
  const {a,t,h,c,besar,kecil,cReduced,f,ci,sv,co:cv}=m;
  const output=document.getElementById('pout');
- const previous=Array.from(output.children);
- output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount,platinum:m.platinum}));
+ // Legacy modules still run first. Extract only their unique content,
+ // then replace the output completely to prevent duplicate metric cards.
+ const oldCards=Array.from(output.children);
+ const original=oldCards.find(n=>n.querySelector('.metrics'));
+ const interpretation=oldCards.find(n=>n.querySelector('h2')?.textContent.startsWith('Arti Struktur Nama'));
+ const steps=original?.querySelector('details');
+ const obstacle=original?.querySelector('.obstacle-panel');
+ const methodNote=original?.querySelector('p.note:last-child');
+ output.innerHTML=build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount,platinum:m.platinum});
  const deep=document.getElementById('avetraDeepContent');
  if(deep){
-  previous.forEach((node,i)=>{
-   if(i===0){
-    const heading=document.createElement('h3');heading.textContent='Langkah perhitungan';deep.appendChild(heading);
-    // Keep the calculation breakdown but do not duplicate the metric cards.
-    const steps=node.querySelector('details');
-    if(steps){steps.open=true;deep.appendChild(steps);}
-    const method=node.querySelector('p.note:last-child');
-    if(method)deep.appendChild(method);
-   } else if(i===1){
-    const heading=document.createElement('h3');heading.textContent='Arti Struktur Nama dan FMEI';deep.appendChild(heading);
-    deep.appendChild(node);
-   } else {deep.appendChild(node);}
-  });
+  if(obstacle){const h3=document.createElement('h3');h3.textContent='Obstacle 3 (O:3)';deep.appendChild(h3);deep.appendChild(obstacle);}
+  if(steps){
+   const h3=document.createElement('h3');h3.textContent='Langkah perhitungan';deep.appendChild(h3);
+   // Avoid nested accordions: parent "Analisis Mendalam" already controls visibility.
+   Array.from(steps.children).filter(n=>n.tagName!=='SUMMARY').forEach(n=>deep.appendChild(n));
+  }
+  if(methodNote)deep.appendChild(methodNote);
+  if(interpretation){
+   const h3=document.createElement('h3');h3.textContent='Arti Struktur Nama dan FMEI';deep.appendChild(h3);
+   // Keep original sourced interpretation, but remove the redundant title.
+   const heading=interpretation.querySelector('h2');if(heading)heading.remove();
+   deep.appendChild(interpretation);
+  }
  }
+
 }
 const btn=document.getElementById('pcalc');
 if(btn)btn.addEventListener('click',run);

@@ -94,3 +94,10 @@ Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan 
 - Gambaran struktur dan aspek pendukung menjadi bagian opsional yang dapat dibuka.
 - Obstacle 3 tanpa deteksi memakai warna netral, sedangkan O:3 terdeteksi tetap diberi penekanan.
 - Cache Safari dan query versi JS diperbarui ke v2.6.1. Tidak ada perubahan rumus.
+
+
+## v2.6.2 UI cleanup
+- Satu panel metrik Platinum, tanpa duplikasi kartu hasil lama.
+- Metode agregat dan hubungan indikator dipindah ke rincian opsional.
+- Analisis Mendalam tidak lagi berisi accordion bertingkat untuk langkah perhitungan.
+- Mesin perhitungan tetap sama dengan v2.6.1.
