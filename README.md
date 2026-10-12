@@ -101,3 +101,19 @@ Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan 
 - Metode agregat dan hubungan indikator dipindah ke rincian opsional.
 - Analisis Mendalam tidak lagi berisi accordion bertingkat untuk langkah perhitungan.
 - Mesin perhitungan tetap sama dengan v2.6.1.
+
+## v2.6.3 Clean Analysis
+- One consolidated Platinum metric grid.
+- One name interpretation section with FMEI in an optional disclosure.
+- Calculations and supplemental metrics grouped under Analysis Mendalam.
+- Methodology and Arkand references grouped under their own disclosure.
+- No numerical calculation formulas changed.
+
+
+## v2.6.4 · Mobile Usability Polish
+- Tombol **↑ Ke atas** muncul setelah menggulir laporan panjang; mendukung safe-area iPhone.
+- Fokus keyboard lebih jelas dan tombol tab memiliki status aksesibilitas `aria-pressed`.
+- Keterbacaan laporan, jarak antar-elemen, dan target sentuh ditingkatkan.
+- Preferensi reduced motion dihormati.
+- Service worker dan URL skrip diperbarui untuk mencegah cache versi lama.
+- Tidak mengubah mesin hitung, kamus, atau hasil numerologi.

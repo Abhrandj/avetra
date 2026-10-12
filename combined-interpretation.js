@@ -31,24 +31,11 @@ function build(r){
  else cNotes.push('c.i '+r.ci+' berasal dari tidak ditemukannya kecocokan selisih 3 pada perhitungan Catur.');
  if(o)cNotes.push('O:3 muncul karena nilai Kecil tereduksi menjadi 3. Ini bukan prediksi cedera atau kehilangan bagian tubuh.');
  if(sv!==null&&cv!==null)cNotes.push('SV dan CV diperiksa terpisah; nilai tinggi pada satu indikator tidak membatalkan indikator perhatian lain.');
- const interpretHtml=`<section class="reading-block platinum-reading">
- <h3>Pembacaan Gabungan Platinum</h3>
- <p><b>Harani ${safe(r.h)}</b> memiliki klasifikasi dasar ${h?safe(h.status_dasar):'belum terdokumentasi'} dalam kamus yang tersedia. Klasifikasi dasar tidak berubah otomatis karena nilai indikator lain.</p>
- <details class="method-details"><summary>Rincian Synergy, Productive & Momentum</summary>
- ${pNotes.length?'<ul>'+pNotes.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p>Hasil agregat belum tersedia untuk nama ini.</p>'}
- </details><details class="method-details"><summary>Hubungan indikator dan c.i</summary><ul>${cNotes.map(x=>'<li>'+safe(x)+'</li>').join('')}</ul></details>
- <p><b>Indikator perhatian terdeteksi:</b> ${safe(String(signals.length))} dari SV, CV dan O:3 yang diperiksa. ${signals.length?'Perlu dibaca bersama klasifikasi dasar, bukan sebagai ramalan.':'Tidak ada sinyal perhatian pada tiga pemeriksaan tersebut; bukan berarti semua aspek kehidupan bebas tantangan.'}</p>
- <details><summary>Metode dan batas interpretasi</summary><p>Synergy menghitung jumlah 100 nilai Vitranta yang tidak termasuk 11, 13, dan 19. Productive memakai posisi 22–81 (60 nilai), dibulatkan ke bawah. Momentum memakai bobot pada posisi 19–58 (40 nilai). Ketiganya hasil rekonstruksi yang cocok pada sejumlah sampel historis, belum tervalidasi secara independen sebagai model prediksi.</p><p>Angka dan simbol tidak dapat digunakan untuk menyimpulkan moralitas, penyakit, kecelakaan, kematian, atau kepastian karier seseorang.</p></details>
- </section>`;
- const conclusion=signals.length?
-   'Ada '+signals.length+' indikator perhatian. Ini tidak mengubah klasifikasi dasar Harani dan bukan ukuran risiko kejadian nyata.':
-   'Tidak ada indikator perhatian dari tiga pemeriksaan yang tersedia. Ini bukan jaminan hasil kehidupan.';
- const html=`<div class="card combined-reading" id="combinedReading">
- <h2>Ringkasan Interpretasi · ${safe(r.n)}</h2>
- <p class="note">Pembacaan simbolik berdasarkan metode SCS, bukan prediksi ilmiah.</p>
- <h3>Indikator Platinum</h3>
+ const html=`<div class="card combined-reading clean-analysis" id="combinedReading">
+ <h2>Ringkasan Platinum · ${safe(r.n)}</h2>
+ <p class="note">Pembacaan simbolik metode SCS, bukan prediksi ilmiah.</p>
  <div class="reading-status platinum-metrics">
- <span><small>Harani</small><b>${safe(r.h)}</b><small>${h?safe(h.status_dasar):'Belum ada klasifikasi'}</small></span>
+ <span><small>Harani</small><b>${safe(r.h)}</b><small>${h?safe(h.status_dasar):'Belum diklasifikasi'}</small></span>
  <span><small>A.R.</small><b>${safe(r.a)}</b></span>
  <span><small>Time</small><b>${safe(r.t)}</b></span>
  <span><small>F / M / E / I</small><b>${safe(r.catur.join(' / '))}</b></span>
@@ -65,15 +52,24 @@ function build(r){
  <span><small>Momentum Stream</small><b>${r.platinum?safe(r.platinum.momentum):"Tidak tersedia"}</b></span>
  <span><small>Vitranta</small><b>${r.platinum?"100 nilai dihitung":"Tidak tersedia"}</b></span>
  </div>
- <p class="note">Synergy, Productive, dan Momentum dihitung dari array Vitranta 100 tahun hasil rekonstruksi. Cocok dengan contoh historis yang diuji, tetapi bukan ukuran keberhasilan hidup.</p>
- ${interpretHtml}\n <details class="reading-extra"><summary>Gambaran struktur dan aspek pendukung</summary><h3>Gambaran struktur</h3>
- <p>${h?'Harani: '+safe(h.fase_pendek)+'. ':''}${a?'Acoustic Root: '+safe(a.arti)+'. ':''}${t?'Time: '+safe(t.kekuatan)+'.':''}</p>
- ${strengths.length?'<h3>Aspek pendukung</h3><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
- ${signals.length?'<h3>Indikator perhatian</h3><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p><b>Indikator perhatian:</b> tidak ditemukan pada SV, CV, dan O:3 yang diperiksa.</p>'}
-
+ <section class="clean-section" aria-label="Interpretasi nama">
+ <h3>Interpretasi Nama</h3>
+ <p><b>Harani ${safe(r.h)}</b>: ${h?safe(h.fase_pendek):'Interpretasi belum tersedia'}. ${h?'Fase panjang: '+safe(h.fase_panjang)+'.':''}</p>
+ <p><b>Acoustic Root ${safe(r.a)}</b>: ${a?safe(a.arti):'Belum tersedia'}.</p>
+ <p><b>Time ${safe(r.t)}</b>: ${t?safe(t.kekuatan):'Belum tersedia'}.</p>
+ <p><b>Hubungan indikator:</b> ${sv!==null?'SV '+safe(r.sv):'SV belum tersedia'}, ${cv!==null?'CV '+safe(r.cv):'CV belum tersedia'}; ${signals.length?safe(signals.length+' indikator perhatian dalam pemeriksaan SV, CV, dan O:3.'):'tidak ada indikator perhatian dalam pemeriksaan SV, CV, dan O:3.'}</p>
+ <details class="clean-subdetail"><summary>Interpretasi FMEI (Fisik, Mental, Emosi, Intuisi)</summary><div id="avetraFmeiContent"></div></details>
+ </section>
+ <details class="clean-section clean-accordion" id="avetraDeep"><summary>Analisis Mendalam · langkah perhitungan</summary>
+ <div id="avetraDeepContent"></div>
+ <details class="clean-subdetail"><summary>Rincian Synergy, Productive & Momentum</summary>${pNotes.length?'<ul>'+pNotes.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p>Hasil agregat belum tersedia.</p>'}</details>
+ <details class="clean-subdetail"><summary>Hubungan indikator dan c.i</summary><ul>${cNotes.map(x=>'<li>'+safe(x)+'</li>').join('')}</ul></details>
  </details>
- <details class="deep-analysis"><summary>Analisis Mendalam · perhitungan dan FMEI</summary><div id="avetraDeepContent"></div></details>
- <p class="note"><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand Bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p>
+ <details class="clean-section clean-accordion"><summary>Metodologi & Referensi</summary>
+ <p>Synergy menghitung nilai Vitranta yang tidak termasuk 11, 13, dan 19. Productive memakai posisi 22–81; Momentum memakai posisi 19–58. Formula ini hasil rekonstruksi dari sampel historis, belum tervalidasi independen sebagai model prediksi.</p>
+ <p>Angka tidak dapat digunakan untuk menyimpulkan moralitas, penyakit, kecelakaan, kematian, atau kepastian karier.</p>
+ <p><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand Bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p>
+ </details>
  </div>`;
  return html;
 }
@@ -103,10 +99,21 @@ function run(){
   }
   if(methodNote)deep.appendChild(methodNote);
   if(interpretation){
-   const h3=document.createElement('h3');h3.textContent='Arti Struktur Nama dan FMEI';deep.appendChild(h3);
-   // Keep original sourced interpretation, but remove the redundant title.
-   const heading=interpretation.querySelector('h2');if(heading)heading.remove();
-   deep.appendChild(interpretation);
+   const fmei=document.getElementById('avetraFmeiContent');
+   if(fmei){
+    // The sourced FMEI text is retained only once, in its dedicated panel.
+    const headings=Array.from(interpretation.querySelectorAll('h3,h4'));
+    const fmeiHeading=headings.find(n=>/FMEI|Composition of Character/i.test(n.textContent));
+    if(fmeiHeading){
+     let n=fmeiHeading.nextElementSibling;
+     while(n && !/Synchronicity dan Coherence/i.test(n.textContent||'')){
+      const next=n.nextElementSibling;
+      fmei.appendChild(n);
+      n=next;
+     }
+    }
+    if(!fmei.children.length)fmei.textContent='Rincian FMEI belum tersedia.';
+   }
   }
  }
 
