@@ -1,3 +1,5 @@
+AVETRA v2.6.6: single six-button navigation; removed duplicate module dropdown. All calculation engines unchanged.
+
 ## AVETRA v2.6.5 Smart Dashboard & Navigation
 
 - Navigasi cepat antarmodul mengikuti tab aktif, termasuk Match & Partner yang ditambahkan dinamis.

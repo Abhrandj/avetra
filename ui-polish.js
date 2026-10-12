@@ -1,29 +1,15 @@
-/* AVETRA v2.6.5: navigation and presentation only. All calculation engines untouched. */
+/* AVETRA v2.6.6: navigation and presentation only. All calculation engines untouched. */
 (function(){
  'use strict';
  function init(){
   const tabs=document.querySelector('.tabs');
   if(!tabs)return;
   tabs.setAttribute('aria-label','Modul AVETRA');
-  const nav=document.createElement('div');nav.className='avetra-quicknav';
-  const lbl=document.createElement('label');lbl.htmlFor='avetraModuleSelect';lbl.textContent='Pindah modul';
-  const select=document.createElement('select');select.id='avetraModuleSelect';select.setAttribute('aria-label','Pilih modul AVETRA');
-  nav.append(lbl,select);tabs.parentNode.insertBefore(nav,tabs.nextSibling);
-  function sync(){
-   const buttons=[...tabs.querySelectorAll('.tab')];
-   const active=buttons.find(b=>b.classList.contains('active'));
-   const current=active?active.dataset.tab:'personal';
-   select.replaceChildren(...buttons.map(b=>{const o=document.createElement('option');o.value=b.dataset.tab;o.textContent=b.textContent.trim();return o;}));
-   select.value=current;
-   buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===active)));
-  }
-  tabs.addEventListener('click',e=>{if(e.target.closest('.tab'))requestAnimationFrame(sync)});
-  new MutationObserver(sync).observe(tabs,{subtree:true,attributes:true,attributeFilter:['class'],childList:true});
-  select.addEventListener('change',()=>{
-   const b=[...tabs.querySelectorAll('.tab')].find(x=>x.dataset.tab===select.value);
-   if(b){b.click();document.querySelector('header').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
-  });
-  sync();
+  // Six original buttons are the only module navigation.
+  const buttons=[...tabs.querySelectorAll('.tab')];
+  function syncPressed(){buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));}
+  tabs.addEventListener('click',e=>{if(e.target.closest('.tab'))requestAnimationFrame(syncPressed);});
+  syncPressed();
   const top=document.createElement('button');top.type='button';top.id='avetraBackTop';top.textContent='↑';top.title='Kembali ke atas';top.setAttribute('aria-label','Kembali ke atas halaman');
   top.addEventListener('click',()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
   document.body.appendChild(top);

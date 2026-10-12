@@ -46,7 +46,7 @@ a,a:visited{color:#62d6ff}a:hover{color:#b7efff}.combined-reading .reading-block
 .clean-analysis .platinum-metrics{margin-bottom:10px}
 @media(max-width:380px){.clean-analysis .platinum-metrics span{min-width:0}.clean-analysis .platinum-metrics b{overflow-wrap:anywhere}}
 
-/* v2.6.5: readable long-form report, accessible controls, safe-area spacing */
+/* v2.6.6: readable long-form report, accessible controls, safe-area spacing */
 html{scroll-behavior:smooth}body{overflow-wrap:break-word} .wrap{padding-bottom:max(26px,env(safe-area-inset-bottom))}
 .clean-analysis p,.clean-analysis li{line-height:1.62}.clean-analysis details>summary{min-height:44px;display:list-item;align-content:center}
 .tab{min-height:46px;line-height:1.3}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #62d6ff;outline-offset:3px}
@@ -55,16 +55,16 @@ html{scroll-behavior:smooth}body{overflow-wrap:break-word} .wrap{padding-bottom:
 @media(max-width:600px){.clean-analysis .card{padding:16px}.clean-analysis .reading-status{gap:8px}.clean-analysis .platinum-metrics span{padding:10px}.clean-analysis h2{overflow-wrap:anywhere}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#avetraBackTop{transition:none}}
 
-/* v2.6.5 smart dashboard: preserve metrics, collapse only secondary display */
-.avetra-quicknav{display:flex;align-items:center;gap:12px;margin:-6px 0 18px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#0b1721}
-.avetra-quicknav label{font-size:.88rem;color:var(--muted);white-space:nowrap}.avetra-quicknav select{flex:1;min-width:0;min-height:44px}
+/* v2.6.6 smart dashboard: preserve metrics, collapse only secondary display */
+
+
 #avetraBackTop{width:46px;height:46px;padding:0;right:12px;bottom:calc(80px + env(safe-area-inset-bottom));font-size:1.35rem;line-height:1}
 .avetra-more-metrics{margin:6px 0 18px;border:1px solid var(--line);border-radius:12px;padding:6px 12px}
 .avetra-more-metrics>summary{font-weight:700;cursor:pointer;padding:10px 0;min-height:44px}
 .avetra-more-metrics .avetra-extra-grid{margin:10px 0}
-@media(max-width:600px){.avetra-quicknav{margin-top:-4px}.avetra-quicknav label{font-size:.8rem}}
+
 </style></head><body><div class="wrap">
-<header><span class="badge">AVETRA v2.6.5 • NAME INTELLIGENCE</span><h1>AVETRA <span style="color:#62d6ff">✦</span></h1><p class="sub">Personal, BrandName, Vitranta & SCS Match & Partner research tools. Masukkan nama untuk mulai menganalisis.</p></header>
+<header><span class="badge">AVETRA v2.6.6 • NAME INTELLIGENCE</span><h1>AVETRA <span style="color:#62d6ff">✦</span></h1><p class="sub">Personal, BrandName, Vitranta & SCS Match & Partner research tools. Masukkan nama untuk mulai menganalisis.</p></header>
 <div class="tabs"><button class="tab active" data-tab="personal">Personal / Platinum</button><button class="tab" data-tab="brand">BrandName</button><button class="tab" data-tab="lifemap">Vitranta Life Map</button><button class="tab" data-tab="cabalistic">Arti Nama</button><button class="tab" data-tab="kamus">Kamus SCS</button></div>
 <section id="cabalistic" class="panel"><div class="card"><h2>Cabalistic • Arti Nama</h2><p class="note">Modul independen berbasis tabel nilai huruf dan arti historis. Tidak mengubah hasil SCS Platinum.</p><label for="cname">Nama yang ingin dianalisis</label><input id="cname" autocomplete="off" placeholder="Ketik nama, contoh: Zoviel Anggica"><p class="note">Hasil berubah langsung saat Anda mengetik.</p></div><div id="cout" aria-live="polite"></div><div id="cdecomp" aria-live="polite"></div></section>
 <section id="kamus" class="panel"><div class="card"><h2>Kamus Interpretasi SCS · Tahap 1</h2><p class="note">Rangkuman interpretasi historis dari artikel Arkand. Klasifikasi dasar bukan kesimpulan gabungan. Klaim tentang penyakit, cedera, dan kematian tidak dapat digunakan untuk memprediksi kejadian nyata.</p><div class="grid"><div><label for="dictType">Indikator</label><select id="dictType"><option value="harani">Harani</option><option value="acoustic_root">Acoustic Root (A.R.)</option><option value="time">Time</option><option value="synchronicity">Synchronicity</option><option value="coherence">Coherence</option><option value="obstacle3">Obstacle 3</option></select></div><div><label for="dictValue">Angka</label><select id="dictValue"></select></div></div><div id="dictOutput" aria-live="polite"></div><p class="note">Sumber: <a href="https://www.jasapembuatnama.com/2015/12/cara-membaca-struktur-nama-scs-tool.html" target="_blank" rel="noopener">Bagian 1</a> · <a href="https://www.jasapembuatnama.com/2016/03/cara-membaca-struktur-nama-time-ar-sv.html" target="_blank" rel="noopener">Bagian 2</a>. Interpretasi SV/CV per nilai belum dimasukkan sampai diverifikasi lebih lanjut.</p></div></section><section id="personal" class="panel active"><div class="card"><h2>Personal Analysis</h2><p class="note">Termasuk Obstacle 3 (O:3), Synchronicity, Besar, Kecil, Catur reduced, dan rincian perhitungan.</p><div class="grid"><div><label for="pname">Nama lengkap atau nama panggilan</label><input id="pname" autocomplete="off" placeholder="Ketik nama"></div><div><label for="pdob">Tanggal lahir (ketuk untuk memilih)</label><input id="pdob" type="date" aria-label="Pilih tanggal lahir"><small class="hint">Format: hari / bulan / tahun</small></div><div><label for="psex">Jenis kelamin / jenis entitas</label><select id="psex"><option value="0">Male</option><option value="1">Female</option><option value="2">Company</option><option value="3">Country</option></select></div></div><button class="go" id="pcalc">Hitung Personal</button></div><div id="pout"></div></section>
