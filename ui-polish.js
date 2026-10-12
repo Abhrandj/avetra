@@ -1,4 +1,4 @@
-/* AVETRA v2.6.7: navigation and presentation only. All calculation engines untouched. */
+/* AVETRA v2.6.8: navigation and presentation only. All calculation engines untouched. */
 (function(){
  'use strict';
  function init(){

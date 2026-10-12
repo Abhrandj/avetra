@@ -1,3 +1,6 @@
+## v2.6.8 Personal Insight & Reference Separation
+Halaman Personal menampilkan ringkasan indikator, interpretasi FMEI, dan sintesis simbolik. Proses hitung dan penjabaran Synergy/Productive/Momentum tidak lagi ditampilkan di Personal; tersedia navigasi ke Vitranta dan referensi di Kamus. Mesin kalkulasi tetap sama.
+
 ## AVETRA v2.6.7 Final Mobile Polish
 
 Analisis Mendalam tertutup setiap kali laporan Personal/Platinum dihitung, dan bisa dibuka lewat judulnya. Navigasi tetap enam tombol tanpa dropdown ganda. Tidak ada perubahan pada rumus, indikator, atau mesin perhitungan.
