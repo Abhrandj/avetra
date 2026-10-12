@@ -1,3 +1,30 @@
+# AVETRA v2.1 • Obstacle 3
+
+Pembaruan dari AVETRA v2.0. Menambahkan indikator **Obstacle 3 (O:3)** pada Personal / Platinum, tanpa mengubah mesin lain.
+
+## Rumus
+
+- A.R. = acousticRoot(nama), Time = time(tanggal lahir).
+- ARk = 4 jika A.R. = 22; selain itu ARk = A.R.
+- KecilRaw = abs(ARk - Time).
+- Kecil = reduksi digit KecilRaw.
+- Jika Kecil = 3, tampilkan **O:3**; selain itu **Tidak terdeteksi**.
+
+## Golden tests dari screenshot
+
+- Kobe Bryant, 1978-08-23: A.R. 5, Time 2, Kecil 3, O:3 tampil.
+- Kobe Bean Bryant, 1978-08-23: A.R. 9, Time 2, Kecil 7, O:3 tidak tampil.
+
+## Batas interpretasi
+
+Obstacle 3 merupakan label simbolis sistem Arkand, bukan prediksi cedera, cacat, kecelakaan atau kematian. Semua modul dan keterbatasan AVETRA v2.0 tetap berlaku.
+
+## Deploy
+
+Upload seluruh isi ZIP ke root GitHub Pages, lalu refresh Safari. Cache PWA dinaikkan ke `avetra-v2.1-1`.
+
+---
+
 AVETRA v1.8 • Mobile UI & Interpretation Cleanup
 
 Unggah semua file ZIP ke root repository GitHub Pages, menimpa file lama.
