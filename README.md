@@ -54,3 +54,7 @@ AVETRA v1.9 • Cabalistic Arti Nama
 - Simulasi persentase = ceil(jumlah makna positif / jumlah makna tersedia × 100); kategori positif/netral/negatif adalah penilaian editorial awal yang bisa diubah per komponen. BUKAN skor situs asli.
 - Tidak mengubah engine SCS/Harani/Match/Partner.
 - Validasi referensi: HITLER 222 -> 200+20+2; SUHARTO 529 -> 500+20+9; JONI 699 -> 600+90+9. Angka persentase referensi situs belum direplikasi.
+
+
+## v2.2: Kamus Interpretasi SCS (Tahap 1)
+Tab Kamus SCS berisi 11 Harani, 12 Acoustic Root, 9 Time, ambang Synchronicity/Coherence, dan Obstacle 3. JSON/JS terpisah agar mudah diaudit. Tahap 1 belum mengimplementasikan pembacaan gabungan atau deskripsi tiap nilai SV/CV. Interpretasi historis, bukan prediksi ilmiah.
