@@ -89,6 +89,8 @@ function run(){
  const obstacle=original?.querySelector('.obstacle-panel');
  const methodNote=original?.querySelector('p.note:last-child');
  output.innerHTML=build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount,platinum:m.platinum});
+ const deepPanel=document.getElementById('avetraDeep');
+ if(deepPanel)deepPanel.open=false; // start each new report with the deep analysis collapsed
  const deep=document.getElementById('avetraDeepContent');
  if(deep){
   if(obstacle){const h3=document.createElement('h3');h3.textContent='Obstacle 3 (O:3)';deep.appendChild(h3);deep.appendChild(obstacle);}

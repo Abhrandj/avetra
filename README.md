@@ -1,3 +1,7 @@
+## AVETRA v2.6.7 Final Mobile Polish
+
+Analisis Mendalam tertutup setiap kali laporan Personal/Platinum dihitung, dan bisa dibuka lewat judulnya. Navigasi tetap enam tombol tanpa dropdown ganda. Tidak ada perubahan pada rumus, indikator, atau mesin perhitungan.
+
 AVETRA v2.6.6: single six-button navigation; removed duplicate module dropdown. All calculation engines unchanged.
 
 ## AVETRA v2.6.5 Smart Dashboard & Navigation
