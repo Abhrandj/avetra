@@ -23,12 +23,30 @@ function build(r){
  const html=`<div class="card combined-reading" id="combinedReading">
  <h2>Ringkasan Interpretasi · ${safe(r.n)}</h2>
  <p class="note">Pembacaan simbolik berdasarkan metode SCS, bukan prediksi ilmiah.</p>
- <div class="reading-status"><span>Harani <b>${safe(r.h)}</b> · ${h?safe(h.status_dasar):'belum terdokumentasi'}</span><span>SV <b>${safe(r.sv)}</b></span><span>CV <b>${safe(r.cv)}</b></span><span>Obstacle <b>${o?'O:3':'Tidak ada O:3'}</b></span></div>
+ <h3>Indikator Platinum</h3>
+ <div class="reading-status platinum-metrics">
+ <span><small>Harani</small><b>${safe(r.h)}</b><small>${h?safe(h.status_dasar):'Belum ada klasifikasi'}</small></span>
+ <span><small>A.R.</small><b>${safe(r.a)}</b></span>
+ <span><small>Time</small><b>${safe(r.t)}</b></span>
+ <span><small>F / M / E / I</small><b>${safe(r.catur.join(' / '))}</b></span>
+ <span><small>Catur reduced</small><b>${safe(r.cReduced.join(' / '))}</b></span>
+ <span><small>f</small><b>${safe(r.f.toFixed(1))}</b></span>
+ <span><small>c.i</small><b>${safe(r.ci)}</b></span>
+ <span><small>Synchronicity (SV)</small><b>${safe(r.sv)}</b></span>
+ <span><small>Coherence (CV)</small><b>${safe(r.cv)}</b></span>
+ <span><small>Besar</small><b>${safe(r.besar)}</b></span>
+ <span><small>Kecil</small><b>${safe(r.kecil)}</b></span>
+ <span><small>Obstacle 3</small><b>${o?'O:3':'Tidak terdeteksi'}</b></span>
+ <span><small>Synergy</small><b class="unverified">Belum tervalidasi</b></span>
+ <span><small>Productive</small><b class="unverified">Belum tervalidasi</b></span>
+ <span><small>Momentum Stream</small><b class="unverified">Belum tervalidasi</b></span>
+ <span><small>Vitranta</small><b class="unverified">Belum tervalidasi</b></span>
+ </div>
  <h3>Gambaran struktur</h3>
  <p>${h?'Harani: '+safe(h.fase_pendek)+'. ':''}${a?'Acoustic Root: '+safe(a.arti)+'. ':''}${t?'Time: '+safe(t.kekuatan)+'.':''}</p>
  ${strengths.length?'<h3>Aspek pendukung</h3><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
  ${signals.length?'<h3>Indikator perhatian</h3><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p><b>Indikator perhatian:</b> tidak ditemukan pada SV, CV, dan O:3 yang diperiksa.</p>'}
- <p class="note">${safe(conclusion)}</p>
+
  <details class="deep-analysis"><summary>Analisis Mendalam · buka rincian lengkap</summary><div id="avetraDeepContent"></div></details>
  <p class="note"><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand Bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p>
  </div>`;
@@ -40,10 +58,14 @@ function run(){
  const sex=Number(document.getElementById('psex').value);
  const a=acousticRoot(name),t=time(date),h=harani(name),c=caturPersonal(name);
  const besar=red(a+t,[11,13,14,16]),kecil=red(Math.abs((a===22?4:a)-t));
+ const cReduced=Object.values(c).map(v=>red(v));
+ const f=[0,.8,.9,1,.7,.3][name.trim().split(/\\s+/).length]??.2;
+ const hits=Object.values(c).filter(v=>Math.abs(a-v)===3).length;
+ const ci=hits===0?1:-hits;
  const sv=synchronicity(besar,kecil,c,sex===3?1:sex),cv=cohPersonal(c,sex===3?1:sex);
  const output=document.getElementById('pout');
  const previous=Array.from(output.children);
- output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,sv,cv}));
+ output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci}));
  const deep=document.getElementById('avetraDeepContent');
  if(deep){
   previous.forEach((node,i)=>{

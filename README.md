@@ -66,3 +66,7 @@ Laporan gabungan di Personal otomatis setelah Hitung Personal. Menunjukkan klasi
 
 ## v2.4 Laporan Terpadu Mobile
 Ringkasan Interpretasi ditampilkan lebih dulu. Analisis Mendalam dapat dibuka untuk menampilkan hasil numerik, rumus, arti struktur, FMEI dan sumber tanpa pengulangan di layar utama. Tidak ada perubahan algoritma SCS.
+
+
+## v2.4.1 — Platinum metrics restored
+Ringkasan menampilkan kembali Harani, A.R., Time, F/M/E/I, Catur reduced, f, c.i, Besar, Kecil, SV, CV, dan O:3. Synergy/Productive/Momentum/Vitranta diberi status belum tervalidasi. Detail rumus tetap dalam Analisis Mendalam. Tidak ada perubahan rumus.
