@@ -17,6 +17,29 @@ function build(r){
  if(sv!==null && sv>=.8)strengths.push('Synchronicity memenuhi ambang');
  if(cv!==null && cv>=.7)strengths.push('Coherence memenuhi ambang');
  if(h && h.status_dasar==='positif')strengths.push('Harani '+r.h+' memiliki klasifikasi dasar positif');
+ // v2.6: interpretation is descriptive, not a predictive or moral scoring model.
+ const plat=r.platinum;
+ const pct=v=>typeof v==='number'&&Number.isFinite(v)?v:null;
+ const sy=plat?pct(plat.synergy):null,pr=plat?pct(plat.productive):null;
+ const raw=plat?pct(plat.momentumRaw):null;
+ const pNotes=[];
+ if(sy!==null)pNotes.push('Synergy '+sy+'%: '+sy+' dari 100 nilai Vitranta masuk kategori hitungan positif pada mesin rekonstruksi. Angka ini bukan peluang sukses.');
+ if(pr!==null)pNotes.push('Productive '+pr+'%: proporsi nilai yang memenuhi kategori hitungan pada rentang 60 posisi Vitranta, dibulatkan ke bawah. Bukan ukuran produktivitas kerja.');
+ if(raw!==null)pNotes.push('Momentum Stream '+String(plat.momentum)+': rata-rata bobot 40 posisi Vitranta adalah '+raw.toFixed(5)+'. Tampilan +1 merupakan batas atas pada rumus, bukan jaminan hasil.');
+ const cNotes=[];
+ if(r.ci<0)cNotes.push('c.i '+r.ci+' berasal dari '+Math.abs(r.ci)+' kecocokan selisih 3 antara A.R. dan Catur mentah. Tanda minus adalah konvensi perhitungan, bukan diagnosis.');
+ else cNotes.push('c.i '+r.ci+' berasal dari tidak ditemukannya kecocokan selisih 3 pada perhitungan Catur.');
+ if(o)cNotes.push('O:3 muncul karena nilai Kecil tereduksi menjadi 3. Ini bukan prediksi cedera atau kehilangan bagian tubuh.');
+ if(sv!==null&&cv!==null)cNotes.push('SV dan CV diperiksa terpisah; nilai tinggi pada satu indikator tidak membatalkan indikator perhatian lain.');
+ const interpretHtml=`<section class="reading-block platinum-reading">
+ <h3>Pembacaan Gabungan Platinum</h3>
+ <p><b>Harani ${safe(r.h)}</b> memiliki klasifikasi dasar ${h?safe(h.status_dasar):'belum terdokumentasi'} dalam kamus yang tersedia. Klasifikasi dasar tidak berubah otomatis karena nilai indikator lain.</p>
+ <h4>Synergy, Productive & Momentum</h4>
+ ${pNotes.length?'<ul>'+pNotes.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p>Hasil agregat belum tersedia untuk nama ini.</p>'}
+ <h4>Hubungan indikator</h4><ul>${cNotes.map(x=>'<li>'+safe(x)+'</li>').join('')}</ul>
+ <p><b>Indikator perhatian terdeteksi:</b> ${safe(String(signals.length))} dari SV, CV dan O:3 yang diperiksa. ${signals.length?'Perlu dibaca bersama klasifikasi dasar, bukan sebagai ramalan.':'Tidak ada sinyal perhatian pada tiga pemeriksaan tersebut; bukan berarti semua aspek kehidupan bebas tantangan.'}</p>
+ <details><summary>Metode dan batas interpretasi</summary><p>Synergy menghitung jumlah 100 nilai Vitranta yang tidak termasuk 11, 13, dan 19. Productive memakai posisi 22–81 (60 nilai), dibulatkan ke bawah. Momentum memakai bobot pada posisi 19–58 (40 nilai). Ketiganya hasil rekonstruksi yang cocok pada sejumlah sampel historis, belum tervalidasi secara independen sebagai model prediksi.</p><p>Angka dan simbol tidak dapat digunakan untuk menyimpulkan moralitas, penyakit, kecelakaan, kematian, atau kepastian karier seseorang.</p></details>
+ </section>`;
  const conclusion=signals.length?
    'Ada '+signals.length+' indikator perhatian. Ini tidak mengubah klasifikasi dasar Harani dan bukan ukuran risiko kejadian nyata.':
    'Tidak ada indikator perhatian dari tiga pemeriksaan yang tersedia. Ini bukan jaminan hasil kehidupan.';
@@ -43,7 +66,7 @@ function build(r){
  <span><small>Vitranta</small><b>${r.platinum?"100 nilai dihitung":"Tidak tersedia"}</b></span>
  </div>
  <p class="note">Synergy, Productive, dan Momentum dihitung dari array Vitranta 100 tahun hasil rekonstruksi. Cocok dengan contoh historis yang diuji, tetapi bukan ukuran keberhasilan hidup.</p>
- <h3>Gambaran struktur</h3>
+ ${interpretHtml}\n <h3>Gambaran struktur</h3>
  <p>${h?'Harani: '+safe(h.fase_pendek)+'. ':''}${a?'Acoustic Root: '+safe(a.arti)+'. ':''}${t?'Time: '+safe(t.kekuatan)+'.':''}</p>
  ${strengths.length?'<h3>Aspek pendukung</h3><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
  ${signals.length?'<h3>Indikator perhatian</h3><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p><b>Indikator perhatian:</b> tidak ditemukan pada SV, CV, dan O:3 yang diperiksa.</p>'}

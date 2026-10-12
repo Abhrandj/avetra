@@ -82,3 +82,7 @@ Akar masalah paling mungkin adalah campuran versi JS karena SW sebelumnya cache-
 
 ## v2.5.0 — Platinum Calculation Engine
 Synergy, Productive, dan Momentum Stream dihitung otomatis dari array Vitranta 100 tahun. Rumus agregasi dipakai ulang dari Vitranta Life Map. Referensi cocok: Kobe Bryant 72/73/0.975; Kobe Bean Bryant 82/78/0.26875; Benjamin Siegel 82/81/0.725; Ben 100/100/0.9625; Siegel 100/100/0.98125; Bugsy 100/100/+1. Port mesin Vitranta tersedia sebelum app.js. Tidak ada angka placeholder. Pembacaan simbolik bukan prediksi ilmiah.
+
+
+## v2.6.0 — Platinum Interpretation Engine
+Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan Synergy, Productive, Momentum Stream, hubungan c.i, Harani, SV, CV, dan O:3, serta metodologi dan keterbatasan. Semua angka diambil dari personalMetrics tunggal; tidak ada perubahan rumus. Hasil bersifat interpretasi simbolik, bukan prediksi medis atau kehidupan.
