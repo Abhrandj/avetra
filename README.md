@@ -78,3 +78,7 @@ Personal dan Ringkasan Interpretasi sekarang menggunakan fungsi `personalMetrics
 
 ## v2.4.3 — Safari cache fix
 Akar masalah paling mungkin adalah campuran versi JS karena SW sebelumnya cache-first. Semua script sekarang memakai URL versi `?v=2.4.3` dan service worker menggunakan network-first untuk JS. Ringkasan menampilkan jumlah kata di kartu f. f=1.0 untuk 3 kata; rumus Personal tetap sama.
+
+
+## v2.5.0 — Platinum Calculation Engine
+Synergy, Productive, dan Momentum Stream dihitung otomatis dari array Vitranta 100 tahun. Rumus agregasi dipakai ulang dari Vitranta Life Map. Referensi cocok: Kobe Bryant 72/73/0.975; Kobe Bean Bryant 82/78/0.26875; Benjamin Siegel 82/81/0.725; Ben 100/100/0.9625; Siegel 100/100/0.98125; Bugsy 100/100/+1. Port mesin Vitranta tersedia sebelum app.js. Tidak ada angka placeholder. Pembacaan simbolik bukan prediksi ilmiah.

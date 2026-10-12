@@ -37,11 +37,12 @@ function build(r){
  <span><small>Besar</small><b>${safe(r.besar)}</b></span>
  <span><small>Kecil</small><b>${safe(r.kecil)}</b></span>
  <span><small>Obstacle 3</small><b>${o?'O:3':'Tidak terdeteksi'}</b></span>
- <span><small>Synergy</small><b class="unverified">Belum tervalidasi</b></span>
- <span><small>Productive</small><b class="unverified">Belum tervalidasi</b></span>
- <span><small>Momentum Stream</small><b class="unverified">Belum tervalidasi</b></span>
- <span><small>Vitranta</small><b class="unverified">Belum tervalidasi</b></span>
+ <span><small>Synergy</small><b>${r.platinum?safe(r.platinum.synergy)+"%":"Tidak tersedia"}</b></span>
+ <span><small>Productive</small><b>${r.platinum?safe(r.platinum.productive)+"%":"Tidak tersedia"}</b></span>
+ <span><small>Momentum Stream</small><b>${r.platinum?safe(r.platinum.momentum):"Tidak tersedia"}</b></span>
+ <span><small>Vitranta</small><b>${r.platinum?"100 nilai dihitung":"Tidak tersedia"}</b></span>
  </div>
+ <p class="note">Synergy, Productive, dan Momentum dihitung dari array Vitranta 100 tahun hasil rekonstruksi. Cocok dengan contoh historis yang diuji, tetapi bukan ukuran keberhasilan hidup.</p>
  <h3>Gambaran struktur</h3>
  <p>${h?'Harani: '+safe(h.fase_pendek)+'. ':''}${a?'Acoustic Root: '+safe(a.arti)+'. ':''}${t?'Time: '+safe(t.kekuatan)+'.':''}</p>
  ${strengths.length?'<h3>Aspek pendukung</h3><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
@@ -60,7 +61,7 @@ function run(){
  const {a,t,h,c,besar,kecil,cReduced,f,ci,sv,co:cv}=m;
  const output=document.getElementById('pout');
  const previous=Array.from(output.children);
- output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount}));
+ output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount,platinum:m.platinum}));
  const deep=document.getElementById('avetraDeepContent');
  if(deep){
   previous.forEach((node,i)=>{
