@@ -1,3 +1,11 @@
+## AVETRA v2.6.5 Smart Dashboard & Navigation
+
+- Navigasi cepat antarmodul mengikuti tab aktif, termasuk Match & Partner yang ditambahkan dinamis.
+- Ringkasan Platinum menampilkan enam indikator utama, sedangkan sepuluh indikator lainnya tersedia melalui panel buka/tutup. Semua nilai tetap ada.
+- Tombol kembali ke atas dibuat lebih kecil dan muncul saat menggulir ke atas pada halaman panjang.
+- Tidak ada perubahan pada mesin perhitungan atau interpretasi SCS.
+- Perlu uji interaksi langsung di Safari iPhone sesudah unggah ke GitHub Pages.
+
 # AVETRA v2.1 • Obstacle 3
 
 Pembaruan dari AVETRA v2.0. Menambahkan indikator **Obstacle 3 (O:3)** pada Personal / Platinum, tanpa mengubah mesin lain.
