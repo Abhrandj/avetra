@@ -56,13 +56,8 @@ function run(){
  const name=document.getElementById('pname')?.value.trim(),date=document.getElementById('pdob')?.value;
  if(!name||!date)return;
  const sex=Number(document.getElementById('psex').value);
- const a=acousticRoot(name),t=time(date),h=harani(name),c=caturPersonal(name);
- const besar=red(a+t,[11,13,14,16]),kecil=red(Math.abs((a===22?4:a)-t));
- const cReduced=Object.values(c).map(v=>red(v));
- const f=[0,.8,.9,1,.7,.3][name.trim().split(/\\s+/).length]??.2;
- const hits=Object.values(c).filter(v=>Math.abs(a-v)===3).length;
- const ci=hits===0?1:-hits;
- const sv=synchronicity(besar,kecil,c,sex===3?1:sex),cv=cohPersonal(c,sex===3?1:sex);
+ const m=personalMetrics(name,date,sex);
+ const {a,t,h,c,besar,kecil,cReduced,f,ci,sv,co:cv}=m;
  const output=document.getElementById('pout');
  const previous=Array.from(output.children);
  output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci}));

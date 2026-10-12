@@ -70,3 +70,7 @@ Ringkasan Interpretasi ditampilkan lebih dulu. Analisis Mendalam dapat dibuka un
 
 ## v2.4.1 — Platinum metrics restored
 Ringkasan menampilkan kembali Harani, A.R., Time, F/M/E/I, Catur reduced, f, c.i, Besar, Kecil, SV, CV, dan O:3. Synergy/Productive/Momentum/Vitranta diberi status belum tervalidasi. Detail rumus tetap dalam Analisis Mendalam. Tidak ada perubahan rumus.
+
+
+## v2.4.2 — Audit f, c.i dan Catur
+Personal dan Ringkasan Interpretasi sekarang menggunakan fungsi `personalMetrics` yang sama. Perbaikan penting: pemisahan jumlah kata memakai `/\\s+/` dengan benar; tiga kata menghasilkan f=1.0. c.i dan Catur juga diambil dari sumber hitung yang sama, bukan dihitung dua kali. Synergy/Productive/Momentum/Vitranta tetap diberi status belum tervalidasi, tanpa angka buatan.
