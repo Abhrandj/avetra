@@ -86,3 +86,11 @@ Synergy, Productive, dan Momentum Stream dihitung otomatis dari array Vitranta 1
 
 ## v2.6.0 — Platinum Interpretation Engine
 Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan Synergy, Productive, Momentum Stream, hubungan c.i, Harani, SV, CV, dan O:3, serta metodologi dan keterbatasan. Semua angka diambil dari personalMetrics tunggal; tidak ada perubahan rumus. Hasil bersifat interpretasi simbolik, bukan prediksi medis atau kehidupan.
+
+
+## v2.6.1 · Mobile report cleanup
+- Indikator Platinum ditampilkan satu kali pada Ringkasan Interpretasi; kartu hasil personal duplikat tidak ditampilkan lagi.
+- Rincian perhitungan dan Arti Struktur Nama/FMEI tetap tersedia dalam Analisis Mendalam.
+- Gambaran struktur dan aspek pendukung menjadi bagian opsional yang dapat dibuka.
+- Obstacle 3 tanpa deteksi memakai warna netral, sedangkan O:3 terdeteksi tetap diberi penekanan.
+- Cache Safari dan query versi JS diperbarui ke v2.6.1. Tidak ada perubahan rumus.

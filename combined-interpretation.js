@@ -66,12 +66,13 @@ function build(r){
  <span><small>Vitranta</small><b>${r.platinum?"100 nilai dihitung":"Tidak tersedia"}</b></span>
  </div>
  <p class="note">Synergy, Productive, dan Momentum dihitung dari array Vitranta 100 tahun hasil rekonstruksi. Cocok dengan contoh historis yang diuji, tetapi bukan ukuran keberhasilan hidup.</p>
- ${interpretHtml}\n <h3>Gambaran struktur</h3>
+ ${interpretHtml}\n <details class="reading-extra"><summary>Gambaran struktur dan aspek pendukung</summary><h3>Gambaran struktur</h3>
  <p>${h?'Harani: '+safe(h.fase_pendek)+'. ':''}${a?'Acoustic Root: '+safe(a.arti)+'. ':''}${t?'Time: '+safe(t.kekuatan)+'.':''}</p>
  ${strengths.length?'<h3>Aspek pendukung</h3><ul>'+strengths.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':''}
  ${signals.length?'<h3>Indikator perhatian</h3><ul>'+signals.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul>':'<p><b>Indikator perhatian:</b> tidak ditemukan pada SV, CV, dan O:3 yang diperiksa.</p>'}
 
- <details class="deep-analysis"><summary>Analisis Mendalam · buka rincian lengkap</summary><div id="avetraDeepContent"></div></details>
+ </details>
+ <details class="deep-analysis"><summary>Analisis Mendalam · langkah perhitungan dan FMEI</summary><div id="avetraDeepContent"></div></details>
  <p class="note"><a href="${safe(d.sources.dasar)}" target="_blank" rel="noopener noreferrer">Referensi Arkand Bagian 1</a> · <a href="${safe(d.sources.detail)}" target="_blank" rel="noopener noreferrer">Bagian 2</a></p>
  </div>`;
  return html;
@@ -88,9 +89,17 @@ function run(){
  const deep=document.getElementById('avetraDeepContent');
  if(deep){
   previous.forEach((node,i)=>{
-   if(i===0){const heading=document.createElement('h3');heading.textContent='Hasil Perhitungan Personal';deep.appendChild(heading);}
-   if(i===1){const heading=document.createElement('h3');heading.textContent='Arti Struktur Nama dan FMEI';deep.appendChild(heading);}
-   deep.appendChild(node);
+   if(i===0){
+    const heading=document.createElement('h3');heading.textContent='Langkah perhitungan';deep.appendChild(heading);
+    // Keep the calculation breakdown but do not duplicate the metric cards.
+    const steps=node.querySelector('details');
+    if(steps){steps.open=true;deep.appendChild(steps);}
+    const method=node.querySelector('p.note:last-child');
+    if(method)deep.appendChild(method);
+   } else if(i===1){
+    const heading=document.createElement('h3');heading.textContent='Arti Struktur Nama dan FMEI';deep.appendChild(heading);
+    deep.appendChild(node);
+   } else {deep.appendChild(node);}
   });
  }
 }
