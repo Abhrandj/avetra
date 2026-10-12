@@ -74,3 +74,7 @@ Ringkasan menampilkan kembali Harani, A.R., Time, F/M/E/I, Catur reduced, f, c.i
 
 ## v2.4.2 — Audit f, c.i dan Catur
 Personal dan Ringkasan Interpretasi sekarang menggunakan fungsi `personalMetrics` yang sama. Perbaikan penting: pemisahan jumlah kata memakai `/\\s+/` dengan benar; tiga kata menghasilkan f=1.0. c.i dan Catur juga diambil dari sumber hitung yang sama, bukan dihitung dua kali. Synergy/Productive/Momentum/Vitranta tetap diberi status belum tervalidasi, tanpa angka buatan.
+
+
+## v2.4.3 — Safari cache fix
+Akar masalah paling mungkin adalah campuran versi JS karena SW sebelumnya cache-first. Semua script sekarang memakai URL versi `?v=2.4.3` dan service worker menggunakan network-first untuk JS. Ringkasan menampilkan jumlah kata di kartu f. f=1.0 untuk 3 kata; rumus Personal tetap sama.

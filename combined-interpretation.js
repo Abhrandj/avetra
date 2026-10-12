@@ -30,7 +30,7 @@ function build(r){
  <span><small>Time</small><b>${safe(r.t)}</b></span>
  <span><small>F / M / E / I</small><b>${safe(r.catur.join(' / '))}</b></span>
  <span><small>Catur reduced</small><b>${safe(r.cReduced.join(' / '))}</b></span>
- <span><small>f</small><b>${safe(r.f.toFixed(1))}</b></span>
+ <span><small>f · ${safe(r.wordCount)} kata</small><b>${safe(r.f.toFixed(1))}</b></span>
  <span><small>c.i</small><b>${safe(r.ci)}</b></span>
  <span><small>Synchronicity (SV)</small><b>${safe(r.sv)}</b></span>
  <span><small>Coherence (CV)</small><b>${safe(r.cv)}</b></span>
@@ -60,7 +60,7 @@ function run(){
  const {a,t,h,c,besar,kecil,cReduced,f,ci,sv,co:cv}=m;
  const output=document.getElementById('pout');
  const previous=Array.from(output.children);
- output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci}));
+ output.insertAdjacentHTML('afterbegin',build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount}));
  const deep=document.getElementById('avetraDeepContent');
  if(deep){
   previous.forEach((node,i)=>{
