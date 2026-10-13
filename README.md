@@ -170,3 +170,7 @@ Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan 
 
 ## v2.8.0 Transit Research
 Adds a 15-year rolling calendar in Vitranta Life Map showing active per-word transit letters (cekVirac), candidate Essence, conventional Personal Year, and Universal Year. Candidate annual mapping is NOT verified against Arkadia Transit_1/2. Existing Platinum calculations unchanged.
+
+
+## v2.8.3
+Lihat CHANGELOG_v2_8_3.md untuk pembaruan antarmuka BrandName yang responsif.

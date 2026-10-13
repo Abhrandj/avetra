@@ -14,7 +14,7 @@
   compare.addEventListener('click',function(){
     const name=document.getElementById('bname').value.trim(),target=document.getElementById('constructionCompareOut');
     if(!name){target.textContent='Isi nama brand terlebih dahulu.';return;}
-    const rows=[19,22].map(i=>{const r=brandExact(name,i);return '<tr><td>'+esc(r.type)+'</td><td>'+esc(r.ar)+'</td><td>'+esc(r.coherence)+'</td><td>'+esc(r.ar===11?'Tidak tersedia':r.match)+'</td><td>'+esc(r.ar===11?'Tidak dapat dihitung':r.sellPower)+'</td></tr>';}).join('');
-    target.innerHTML='<div class="card"><h3>Perbandingan kategori Classic: '+esc(name)+'</h3><div style="overflow-x:auto"><table style="width:100%;text-align:left;border-spacing:10px"><thead><tr><th>Kategori</th><th>A.R.</th><th>Coherence</th><th>MATCH</th><th>Sell Power</th></tr></thead><tbody>'+rows+'</tbody></table></div><p class="note">Perbandingan dua kategori SCS Classic yang sudah ada. Tidak ada kategori atau matriks baru. Ini bukan prediksi keberhasilan usaha.</p></div>';
+    const rows=[19,22].map(i=>{const r=brandExact(name,i);const data=[['A.R.',r.ar],['Coherence',r.coherence],['MATCH',r.ar===11?'Tidak tersedia':r.match],['Sell Power',r.ar===11?'Tidak dapat dihitung':r.sellPower]];return '<article class="brand-compare-card"><h4>'+esc(r.type)+'</h4><div class="brand-data-grid">'+data.map(([k,v])=>'<div><small>'+esc(k)+'</small><strong>'+esc(v)+'</strong></div>').join('')+'</div></article>';}).join('');
+    target.innerHTML='<div class="brand-comparison"><h3>Perbandingan kategori Classic: '+esc(name)+'</h3><div class="brand-compare-grid">'+rows+'</div><p class="note">Perbandingan dua kategori SCS Classic yang sudah ada. Tidak ada kategori atau matriks baru. Ini bukan prediksi keberhasilan usaha.</p></div>';
   });
 })();
