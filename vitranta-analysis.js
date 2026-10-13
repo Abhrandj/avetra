@@ -18,7 +18,7 @@
   $('vchart').innerHTML=s;
   $('vchart').querySelectorAll('circle[data-age]').forEach(c=>c.onclick=()=>choose(+c.dataset.age));
  }
- function choose(i){sel=i;$('vyear').value=i;$('vdetail').textContent=`Usia ${i} • Tahun ${birth+i} • Vitranta ${vals[i]} • Effect ${effect(vals[i])>0?'+':''}${effect(vals[i])} • Synergy ${positive(vals[i])?'positif':'tidak positif'} • Productive ${i>=21&&i<=80?'aktif':'di luar jendela'} • Momentum ${i>=18&&i<=57?'aktif':'di luar jendela'}`;redraw()}
+ function choose(i){sel=i;$('vyear').value=i;$('vdetail').textContent=`Usia ${i} • Tahun ulang tahun ${birth+i} • Vitranta ${vals[i]} • Effect ${effect(vals[i])>0?'+':''}${effect(vals[i])} • Synergy ${positive(vals[i])?'positif':'tidak positif'} • Productive ${i>=21&&i<=80?'aktif':'di luar jendela'} • Momentum ${i>=18&&i<=57?'aktif':'di luar jendela'}`;redraw()}
  function calc(){
   let input=$('vvalues').value.trim(),parts=input.split(/[\s,;]+/).filter(Boolean);
   if(parts.length!==100||parts.some(x=>!(/^\d+$/.test(x))||!(+x in W))){$('lout').innerHTML='<div class="card warning">Masukkan tepat 100 angka yang valid: 1–9, 11, 13, 14, 16, 19, atau 22.</div>';return}
@@ -26,12 +26,12 @@
   let d=$('ldob').value;birth=d?+d.slice(0,4):new Date().getFullYear();
   const sy=vals.filter(positive).length,prod=vals.slice(21,81).filter(positive).length,ms=vals.slice(18,58).reduce((a,v)=>a+effect(v),0)/40;
   const negative=vals.flatMap((v,i)=>[13,16,19].includes(v)?[birth+i]:[]);
-  const name=$('lname').value.trim();
-  $('lout').innerHTML=`<div class="card"><h2>Life Map ${name?escapeHtml(name):'100 Tahun'}</h2><p class="note">Hasil agregasi dari array yang Anda masukkan, bukan perhitungan Vitranta otomatis.</p><div class="metrics"><div class="metric"><small>Synergy</small><b>${sy}%</b></div><div class="metric"><small>Productive</small><b>${Math.floor(prod/60*100)}%</b></div><div class="metric"><small>Momentum raw</small><b>${ms.toFixed(5).replace(/0+$/,'').replace(/\.$/,'')}</b></div></div><p class="note">Momentum display: ${ms>1?'+1':ms<0?'Negatif':ms.toFixed(5)}</p><div class="chartwrap"><svg id="vchart" viewBox="0 0 1060 350" role="img" aria-label="Grafik bobot Momentum selama 100 tahun"></svg></div><label for="vyear">Pilih usia</label><input type="range" min="0" max="99" value="0" id="vyear"><div class="vdetail" id="vdetail"></div><p class="note">Tahun tekanan (13/16/19): ${negative.length?negative.join(', '):'Tidak ada'}</p><button id="vcsv">Unduh CSV</button></div>`;
+  const name=$('lname').value.trim();const automatic=$('vvalues').dataset.source==='automatic';
+  $('lout').innerHTML=`<div class="card"><h2>Life Map ${name?escapeHtml(name):'100 Tahun'}</h2><p class="note">${automatic?'100 nilai Vitranta dihitung otomatis dari nama melalui port mesin Platinum. Ringkasan memakai agregasi AVETRA yang masih berstatus rekonstruksi.':'Mode audit manual: agregasi dari 100 nilai yang Anda masukkan, bukan perhitungan otomatis.'}</p><div class="metrics"><div class="metric"><small>Synergy</small><b>${sy}%</b></div><div class="metric"><small>Productive</small><b>${Math.floor(prod/60*100)}%</b></div><div class="metric"><small>Momentum raw</small><b>${ms.toFixed(5).replace(/0+$/,'').replace(/\.$/,'')}</b></div></div><p class="note">Momentum display: ${ms>1?'+1':ms<0?'Negatif':ms.toFixed(5)}</p><div class="chartwrap"><svg id="vchart" viewBox="0 0 1060 350" role="img" aria-label="Grafik bobot Momentum selama 100 tahun"></svg></div><label for="vyear">Pilih usia</label><input type="range" min="0" max="99" value="0" id="vyear"><div class="vdetail" id="vdetail"></div><p class="note">Tahun dengan nilai 13/16/19 (klasifikasi simbolik, bukan prediksi kejadian): ${negative.length?negative.join(', '):'Tidak ada'}</p><button id="vcsv">Unduh CSV</button></div>`;
   $('vyear').oninput=e=>choose(+e.target.value);
   $('vcsv').onclick=()=>{const data='usia,tahun,vitranta,effect,synergy_positive,productive_window,momentum_window\n'+vals.map((v,i)=>[i,birth+i,v,effect(v),+positive(v),+(i>=21&&i<=80),+(i>=18&&i<=57)].join(',')).join('\n');const u=URL.createObjectURL(new Blob([data],{type:'text/csv'})),a=document.createElement('a');a.href=u;a.download='avetra_vitranta.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
   choose(0);
  }
  function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
- $('vcalc').onclick=calc;$('vclear').onclick=()=>{$('vvalues').value='';$('lout').innerHTML=''};
+ $('vcalc').onclick=()=>{if($('vvalues').dataset.source!=='automatic')$('vvalues').dataset.source='manual';calc()};$('vclear').onclick=()=>{$('vvalues').value='';$('vvalues').dataset.source='manual';$('lout').innerHTML=''};
 })();
