@@ -1,3 +1,9 @@
+## v2.7.0 • Reading Engine tahap 1
+- Interpretasi terstruktur Harani, SV, CV, O:3 dan agregat Vitranta.
+- Perbaikan ruang tombol Hitung dan tombol kembali ke atas di Safari iPhone.
+- Mesin perhitungan tidak diubah; ambang tetap rekonstruksi.
+- Perlu uji Safari dan validasi sampel historis.
+
 ## v2.6.8 Personal Insight & Reference Separation
 Halaman Personal menampilkan ringkasan indikator, interpretasi FMEI, dan sintesis simbolik. Proses hitung dan penjabaran Synergy/Productive/Momentum tidak lagi ditampilkan di Personal; tersedia navigasi ke Vitranta dan referensi di Kamus. Mesin kalkulasi tetap sama.
 

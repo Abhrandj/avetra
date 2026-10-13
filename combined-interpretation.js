@@ -1,4 +1,4 @@
-/* AVETRA v2.6.9 - sourced, non-predictive combined interpretation */
+/* AVETRA v2.7.0 - sourced, non-predictive combined interpretation */
 (function(){
 'use strict';
 const d=window.AVETRA_SCS_DICTIONARY;
@@ -20,6 +20,9 @@ function build(r){
  if(h && h.status_dasar==='positif')strengths.push('Harani '+r.h+' memiliki klasifikasi dasar positif');
  // v2.6: interpretation is descriptive, not a predictive or moral scoring model.
  const combinedStatus=signals.length?'Struktur campuran: '+signals.length+' indikator perhatian':'Tidak ditemukan indikator perhatian pada pemeriksaan yang tersedia';
+ const quality=(v,min)=>v===null?'Belum tersedia':v<min?'Di bawah ambang rekonstruksi':'Memenuhi ambang rekonstruksi';
+ const obstacles=o?'O:3 terdeteksi, perlu dibaca tersendiri.':'O:3 tidak terdeteksi.';
+ const supporting=signals.length?'Indikator pendukung tidak menghapus indikator perhatian yang ditemukan.':'Tidak ada indikator perhatian dalam cakupan aturan yang sudah tersedia; ini bukan jaminan hasil kehidupan.';
  const plat=r.platinum;
  const pct=v=>typeof v==='number'&&Number.isFinite(v)?v:null;
  const sy=plat?pct(plat.synergy):null,pr=plat?pct(plat.productive):null;
@@ -49,6 +52,15 @@ function build(r){
  <h3>Pembacaan Gabungan</h3>
  <p><b>${safe(combinedStatus)}.</b> ${signals.length?'Indikator yang perlu diperiksa: '+safe(signals.join('; '))+'.':'Harani, SV, CV, dan O:3 telah diperiksa dengan aturan yang tersedia.'}</p>
  <p class="note">Harani positif tidak menghapus indikator merah. Ambang SV/CV mengikuti kamus rekonstruksi dan belum seluruhnya diverifikasi terhadap sumber historis. Obstacle adalah kategori simbolik, bukan prediksi kejadian.</p>
+ </section>
+ <section class="clean-section avetra-reading-engine" aria-label="SCS Reading Engine">
+ <h3>SCS Reading Engine · Tahap 1</h3>
+ <p><b>Struktur dasar:</b> Harani ${safe(r.h)} (${h?safe(h.status_dasar):'belum diklasifikasi'}), Acoustic Root ${safe(r.a)}, Time ${safe(r.t)}. Klasifikasi Harani tidak berdiri sendiri sebagai kesimpulan akhir.</p>
+ <p><b>Kesempatan / Synchronicity:</b> ${sv===null?'Belum tersedia':safe(r.sv)+' · '+safe(quality(sv,d.thresholds.synchronicity.positive_min))}. <b>Penguasaan / Coherence:</b> ${cv===null?'Belum tersedia':safe(r.cv)+' · '+safe(quality(cv,d.thresholds.coherence.positive_min))}.</p>
+ <p><b>Hambatan khusus:</b> ${safe(obstacles)} ${signals.length?'Catatan perhatian: '+safe(signals.join('; '))+'.':'Tidak ada sinyal perhatian dari pemeriksaan yang tersedia.'}</p>
+ <p><b>Perjalanan Vitranta:</b> Synergy ${sy===null?'belum tersedia':safe(sy)+'%'}, Productive ${pr===null?'belum tersedia':safe(pr)+'%'}, Momentum ${raw===null?'belum tersedia':safe(r.platinum.momentum)}. Ketiganya adalah ukuran terpisah; belum ada bukti bahwa Synergy dan Productive dijumlahkan menjadi Momentum.</p>
+ <p><b>Sintesis:</b> ${safe(supporting)}</p>
+ <p class="note">FMEI dibaca sebagai komposisi simbolik nama. Hubungan matematis langsung FMEI terhadap SV/CV dan Time belum terverifikasi. Ambang serta makna indikator mengikuti rekonstruksi, bukan prediksi keberhasilan, kesehatan, atau keselamatan.</p>
  </section>
  <section class="clean-section" aria-label="Interpretasi nama">
  <h3>Interpretasi Nama</h3>

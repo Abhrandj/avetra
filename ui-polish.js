@@ -14,7 +14,7 @@
   top.addEventListener('click',()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
   document.body.appendChild(top);
   let previous=window.scrollY,ticking=false;
-  function update(){const y=window.scrollY;top.classList.toggle('show',y>750&&(y<previous-3||Math.abs(y-previous)<3));previous=y;ticking=false;}
+  function update(){const y=window.scrollY;top.classList.toggle('show',y>1200&&(y<previous-3||Math.abs(y-previous)<3));previous=y;ticking=false;}
   window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});update();
   function arrange(){
    const metrics=document.querySelector('#combinedReading .platinum-metrics');
