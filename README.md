@@ -166,3 +166,7 @@ Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan 
 - Mempertahankan rumus dan engine kalkulasi v2.6.8 tanpa perubahan.
 - Ambang interpretasi masih bersumber dari kamus rekonstruksi; bukan validasi prediktif.
 - Memperbarui cache service worker dan query versi aset untuk Safari iOS.
+
+
+## v2.8.0 Transit Research
+Adds a 15-year rolling calendar in Vitranta Life Map showing active per-word transit letters (cekVirac), candidate Essence, conventional Personal Year, and Universal Year. Candidate annual mapping is NOT verified against Arkadia Transit_1/2. Existing Platinum calculations unchanged.
