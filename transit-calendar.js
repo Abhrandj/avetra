@@ -11,8 +11,8 @@ function stream(word){const a=[];for(const letter of word){for(let i=0;i<val(let
 function yearDigit(year){return digit(year);}
 function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function render(){
- const name=$('lname').value.trim().toUpperCase(), dob=$('ldob').value, out=$('transitOut');
- if(!/^[A-Z]+(?:\s+[A-Z]+)*$/.test(name)||!dob){out.innerHTML='<p class="note">Isi nama dengan huruf A–Z dan tanggal lahir pada formulir Vitranta.</p>';return;}
+ const entered=$('lname').value, name=(typeof scsNormalizeName==='function'?scsNormalizeName(entered):String(entered??'').toUpperCase().replace(/[^A-Z0-9\s]/g,'').replace(/\s+/g,' ').trim()), dob=$('ldob').value, out=$('transitOut');
+ if(!/^[A-Z]+(?:\s+[A-Z]+)*$/.test(name)||name.split(/\s+/).length>9||!dob){out.innerHTML='<p class="note">Masukkan nama (1–9 kata) dan tanggal lahir yang valid. Tanda baca pada nama diabaikan.</p>';return;}
  const words=name.split(/\s+/), streams=words.map(stream), start=Number(dob.slice(0,4)), month=Number(dob.slice(5,7)), day=Number(dob.slice(8,10));
  const now=new Date(), defaultAge=Math.min(99,Math.max(0,now.getFullYear()-start-(now.getMonth()+1<month||(now.getMonth()+1===month&&now.getDate()<day)?1:0)));
  const from=Math.max(0,Math.min(90,Number($('transitStart').value)||0));$('transitStart').value=from;
