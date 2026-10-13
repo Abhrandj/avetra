@@ -174,3 +174,6 @@ Adds a 15-year rolling calendar in Vitranta Life Map showing active per-word tra
 
 ## v2.8.3
 Lihat CHANGELOG_v2_8_3.md untuk pembaruan antarmuka BrandName yang responsif.
+
+## v2.8.4
+Lihat CHANGELOG_v2_8_4.md untuk validasi input Personal / Platinum.

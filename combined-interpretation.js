@@ -54,6 +54,7 @@ function build(r){
  <span><small>Momentum Stream</small><b>${r.platinum?safe(r.platinum.momentum):"Tidak tersedia"}</b></span>
  <span><small>Vitranta</small><b>${r.platinum?"100 nilai dihitung":"Tidak tersedia"}</b></span>
  </div>
+ ${r.platinumError?'<div class="card warning" role="status"><b>Hasil Platinum belum lengkap.</b><p>Synergy, Productive, Momentum, dan Vitranta tidak tersedia: '+safe(r.platinumError)+'.</p><p class="note">Harani, A.R., Time, SV, dan CV tetap merupakan hasil parsial. Nilai yang tidak tersedia bukan 0%.</p></div>':''}
  <section class="clean-section" aria-label="Pembacaan gabungan">
  <h3>Pembacaan Gabungan</h3>
  <p><b>${safe(combinedStatus)}.</b> ${signals.length?'Indikator yang perlu diperiksa: '+safe(signals.join('; '))+'.':'Harani, SV, CV, dan O:3 telah diperiksa dengan aturan yang tersedia.'}</p>
@@ -98,7 +99,7 @@ function build(r){
 }
 function run(){
  const name=document.getElementById('pname')?.value.trim(),date=document.getElementById('pdob')?.value;
- if(!name||!date)return;
+ if(avetraPersonalValidation(name,date))return;
  const sex=Number(document.getElementById('psex').value);
  const m=personalMetrics(name,date,sex);
  const {a,t,h,c,besar,kecil,cReduced,f,ci,sv,co:cv}=m;
@@ -108,7 +109,7 @@ function run(){
  const oldCards=Array.from(output.children);
  const original=oldCards.find(n=>n.querySelector('.metrics'));
  const interpretation=oldCards.find(n=>n.querySelector('h2')?.textContent.startsWith('Arti Struktur Nama'));
- output.innerHTML=build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount,platinum:m.platinum});
+ output.innerHTML=build({n:name,a,t,h,kecil,besar,sv,cv,catur:Object.values(c),cReduced,f,ci,wordCount:m.wordCount,platinum:m.platinum,platinumError:m.platinumError});
  const toTab=tab=>{const btn=document.querySelector('.tabs .tab[data-tab="'+tab+'"]');if(btn){btn.click();window.scrollTo({top:0,behavior:'smooth'});}};
  output.querySelector('.avetra-go-vitranta')?.addEventListener('click',()=>toTab('lifemap'));
  output.querySelector('.avetra-go-kamus')?.addEventListener('click',()=>toTab('kamus'));
