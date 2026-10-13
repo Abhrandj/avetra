@@ -3,10 +3,13 @@ const SCS_BRAND_CATEGORIES = ['Antique', 'Automotive', 'Beverage', 'Community', 
 const MATCH_AR = [1,2,3,4,5,6,7,8,9,22];
 const MATCH_TABLE = [[60, 80, 40, 50, 20, 90, 100, 70, 30, 10], [100, 50, 40, 70, 60, 90, 80, 100, 10, 100], [20, 80, 70, 90, 100, 100, 20, 60, 50, 100], [50, 70, 90, 100, 80, 70, 60, 90, 60, 100], [70, 60, 100, 90, 50, 80, 100, 100, 90, 100], [90, 70, 50, 60, 70, 100, 80, 90, 10, 100], [100, 70, 60, 80, 100, 60, 70, 90, 50, 100], [10, 90, 90, 70, 100, 60, 40, 80, 50, 100], [70, 100, 90, 90, 80, 100, 70, 90, 60, 100], [20, 80, 70, 90, 100, 100, 20, 60, 50, 100], [90, 90, 70, 100, 80, 100, 50, 100, 60, 100], [70, 90, 80, 70, 80, 90, 100, 100, 90, 100], [70, 100, 90, 80, 60, 80, 50, 90, 100, 100], [20, 100, 80, 70, 90, 60, 50, 100, 60, 100], [100, 70, 70, 100, 100, 60, 90, 80, 50, 80], [100, 70, 60, 80, 100, 60, 90, 100, 50, 90], [50, 80, 90, 60, 70, 80, 100, 60, 80, 100], [100, 70, 70, 100, 100, 50, 90, 80, 60, 80], [50, 90, 80, 90, 100, 80, 70, 70, 100, 100], [100, 80, 70, 100, 100, 90, 90, 100, 60, 100], [70, 60, 100, 40, 80, 90, 10, 40, 50, 40], [80, 90, 100, 70, 100, 90, 60, 70, 80, 70], [90, 100, 80, 90, 90, 80, 100, 100, 70, 100], [60, 50, 70, 90, 100, 80, 40, 20, 30, 90], [40, 50, 60, 90, 70, 60, 80, 100, 30, 100], [50, 100, 60, 80, 60, 70, 100, 90, 40, 100], [50, 80, 90, 70, 100, 50, 60, 90, 30, 100], [80, 70, 90, 100, 60, 100, 80, 70, 90, 100], [100, 70, 70, 100, 100, 60, 90, 80, 60, 100]];
 const LETTER_VALUE = Object.fromEntries([['AJS1',1],['BKT2',2],['CLU3',3],['DMV4',4],['ENW5',5],['FOX6',6],['GPY7',7],['HQZ8',8],['IR9',9]].flatMap(([s,n])=>[...s].map(c=>[c,n])));
-function cleanName(s) { return String(s).toUpperCase().replaceAll(' ', ''); }
+// AVETRA input normalization: preserve word boundaries, discard punctuation.
+// Digits remain for BrandName Classic's historic A group; do not assign them letter values.
+function scsNormalizeName(s) { return String(s ?? '').toUpperCase().replace(/[^A-Z0-9\s]/g, '').replace(/\s+/g, ' ').trim(); }
+function cleanName(s) { return scsNormalizeName(s).replaceAll(' ', ''); }
 function sum1Digit(n, preserve=[]) { n=Math.abs(Number(n)||0); while(n>=10 && !preserve.includes(n)) n=[...String(n)].reduce((a,c)=>a+Number(c),0); return n; }
 function acousticRoot(name) {
-  const parts=String(name).split(' '); // mirrors old single-space delimiter behavior for normal inputs
+  const parts=scsNormalizeName(name).split(' '); // punctuation removed before word-level reduction
   const vals=parts.map(p=>{ const sum=[...cleanName(p)].reduce((a,c)=>a+(LETTER_VALUE[c]||0),0); return [11,22].includes(sum)?sum:sum1Digit(sum); });
   const total=vals.reduce((a,b)=>a+b,0); return [11,22].includes(total)?total:sum1Digit(total);
 }

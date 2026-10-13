@@ -41,7 +41,7 @@ function cards(data){return `<div class="metrics">${data.map(([k,v])=>`<div clas
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 // Shared Platinum calculation: both Personal and Interpretation must use this one result.
 function personalMetrics(n,d,sex){
- const name=n.trim().replace(/\s+/g,' ');
+ const name=scsNormalizeName(n);
  const a=acousticRoot(name),t=time(d),c=caturPersonal(name);
  const h=harani(name),co=cohPersonal(c,sex===3?1:sex);
  const wordCount=name.split(' ').length;
@@ -57,7 +57,7 @@ function personalMetrics(n,d,sex){
  return {platinum,platinumError,name,a,t,c,h,co,f,ci,besarRaw,besar,om,kecilRaw,kecil,cReduced,sv,obstacle3:kecil===3,wordCount};
 }
 function personal(){let n=$('pname').value.trim().replace(/\s+/g,' '),d=$('pdob').value,sex=+$('psex').value;const invalid=avetraPersonalValidation(n,d);if(invalid){$('pout').innerHTML='<div class="card warning">'+esc(invalid)+'</div>';return}
-let {a,t,c,co,h,f,ci,besarRaw,besar,om,kecilRaw,kecil,obstacle3,cReduced,sv,platinum,platinumError}=personalMetrics(n,d,sex);let components=n.split(' ').map(word=>{let total=[...word.toUpperCase()].reduce((v,ch)=>v+(LETTER_VALUE[ch]||0),0);return {word,total,reduced:[11,22].includes(total)?total:red(total)}});
+let {a,t,c,co,h,f,ci,besarRaw,besar,om,kecilRaw,kecil,obstacle3,cReduced,sv,platinum,platinumError}=personalMetrics(n,d,sex);let components=scsNormalizeName(n).split(' ').map(word=>{let total=[...word.toUpperCase()].reduce((v,ch)=>v+(LETTER_VALUE[ch]||0),0);return {word,total,reduced:[11,22].includes(total)?total:red(total)}});
 $('pout').innerHTML=`<div class="card"><h2>${esc(n)}</h2><p class="note">Menyiapkan ringkasan pembacaan Platinum…</p></div>`;}
 
 
