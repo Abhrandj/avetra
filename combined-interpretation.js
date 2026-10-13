@@ -1,4 +1,4 @@
-/* AVETRA v2.6.8 - sourced, non-predictive combined interpretation */
+/* AVETRA v2.6.9 - sourced, non-predictive combined interpretation */
 (function(){
 'use strict';
 const d=window.AVETRA_SCS_DICTIONARY;
@@ -13,11 +13,13 @@ function build(r){
  if(sv!==null && sv<d.thresholds.synchronicity.positive_min)signals.push('Synchronicity '+sv.toFixed(2)+' di bawah ambang '+d.thresholds.synchronicity.positive_min.toFixed(1));
  if(cv!==null && cv<d.thresholds.coherence.positive_min)signals.push('Coherence '+cv.toFixed(2)+' di bawah ambang '+d.thresholds.coherence.positive_min.toFixed(1));
  if(o)signals.push('Obstacle 3 (O:3) terdeteksi dari selisih A.R. dan Time');
+ if(h && h.status_dasar !== 'positif')signals.push('Harani '+r.h+' tidak berada dalam klasifikasi dasar positif');
  const strengths=[];
  if(sv!==null && sv>=.8)strengths.push('Synchronicity memenuhi ambang');
  if(cv!==null && cv>=.7)strengths.push('Coherence memenuhi ambang');
  if(h && h.status_dasar==='positif')strengths.push('Harani '+r.h+' memiliki klasifikasi dasar positif');
  // v2.6: interpretation is descriptive, not a predictive or moral scoring model.
+ const combinedStatus=signals.length?'Struktur campuran: '+signals.length+' indikator perhatian':'Tidak ditemukan indikator perhatian pada pemeriksaan yang tersedia';
  const plat=r.platinum;
  const pct=v=>typeof v==='number'&&Number.isFinite(v)?v:null;
  const sy=plat?pct(plat.synergy):null,pr=plat?pct(plat.productive):null;
@@ -43,6 +45,11 @@ function build(r){
  <span><small>Momentum Stream</small><b>${r.platinum?safe(r.platinum.momentum):"Tidak tersedia"}</b></span>
  <span><small>Vitranta</small><b>${r.platinum?"100 nilai dihitung":"Tidak tersedia"}</b></span>
  </div>
+ <section class="clean-section" aria-label="Pembacaan gabungan">
+ <h3>Pembacaan Gabungan</h3>
+ <p><b>${safe(combinedStatus)}.</b> ${signals.length?'Indikator yang perlu diperiksa: '+safe(signals.join('; '))+'.':'Harani, SV, CV, dan O:3 telah diperiksa dengan aturan yang tersedia.'}</p>
+ <p class="note">Harani positif tidak menghapus indikator merah. Ambang SV/CV mengikuti kamus rekonstruksi dan belum seluruhnya diverifikasi terhadap sumber historis. Obstacle adalah kategori simbolik, bukan prediksi kejadian.</p>
+ </section>
  <section class="clean-section" aria-label="Interpretasi nama">
  <h3>Interpretasi Nama</h3>
  <p><b>Harani ${safe(r.h)}</b>: ${h?safe(h.fase_pendek):'Interpretasi belum tersedia'}. ${h?'Fase panjang: '+safe(h.fase_panjang)+'.':''}</p>

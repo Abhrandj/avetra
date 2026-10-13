@@ -134,3 +134,11 @@ Ringkasan Personal kini memuat Pembacaan Gabungan Platinum: penjelasan hitungan 
 - Preferensi reduced motion dihormati.
 - Service worker dan URL skrip diperbarui untuk mencegah cache versi lama.
 - Tidak mengubah mesin hitung, kamus, atau hasil numerologi.
+
+
+## v2.6.9 - Personal Reading Cleanup
+- Menghapus rincian langkah perhitungan dari renderer utama Personal.
+- Menambahkan pembacaan gabungan: Harani positif tidak menghapus perhatian SV/CV/O:3.
+- Mempertahankan rumus dan engine kalkulasi v2.6.8 tanpa perubahan.
+- Ambang interpretasi masih bersumber dari kamus rekonstruksi; bukan validasi prediktif.
+- Memperbarui cache service worker dan query versi aset untuk Safari iOS.
