@@ -1,4 +1,4 @@
-/* AVETRA v2.7.0 - sourced, non-predictive combined interpretation */
+/* AVETRA v2.7.1 - sourced, non-predictive combined interpretation */
 (function(){
 'use strict';
 const d=window.AVETRA_SCS_DICTIONARY;
@@ -27,6 +27,12 @@ function build(r){
  const pct=v=>typeof v==='number'&&Number.isFinite(v)?v:null;
  const sy=plat?pct(plat.synergy):null,pr=plat?pct(plat.productive):null;
  const raw=plat?pct(plat.momentumRaw):null;
+ const vitranta=plat&&Array.isArray(plat.values)?plat.values:null;
+ const counts=vitranta?{
+  synergy:vitranta.filter(v=>![11,13,19].includes(v)).length,
+  productive:vitranta.slice(21,81).filter(v=>![11,13,19].includes(v)).length
+ }:null;
+ const fmt=v=>v===null?'Tidak tersedia':Number(v.toFixed(5)).toString();
  const html=`<div class="card combined-reading clean-analysis" id="combinedReading">
  <h2>Ringkasan Platinum · ${safe(r.n)}</h2>
  <p class="note">Pembacaan simbolik metode SCS, bukan prediksi ilmiah.</p>
@@ -61,6 +67,17 @@ function build(r){
  <p><b>Perjalanan Vitranta:</b> Synergy ${sy===null?'belum tersedia':safe(sy)+'%'}, Productive ${pr===null?'belum tersedia':safe(pr)+'%'}, Momentum ${raw===null?'belum tersedia':safe(r.platinum.momentum)}. Ketiganya adalah ukuran terpisah; belum ada bukti bahwa Synergy dan Productive dijumlahkan menjadi Momentum.</p>
  <p><b>Sintesis:</b> ${safe(supporting)}</p>
  <p class="note">FMEI dibaca sebagai komposisi simbolik nama. Hubungan matematis langsung FMEI terhadap SV/CV dan Time belum terverifikasi. Ambang serta makna indikator mengikuti rekonstruksi, bukan prediksi keberhasilan, kesehatan, atau keselamatan.</p>
+ </section>
+ <section class="clean-section" aria-label="Audit Vitranta">
+ <h3>Audit Perhitungan Vitranta</h3>
+ <p class="note">Bagian ini menjelaskan implementasi AVETRA yang berjalan saat ini, bukan konfirmasi rumus historis Arkand.</p>
+ <details class="clean-subdetail"><summary>Lihat asal angka Synergy, Productive, Momentum</summary>
+ <div class="avetra-audit-detail">
+ <p><b>Synergy:</b> ${counts?counts.synergy+' dari 100 posisi memenuhi klasifikasi implementasi = '+safe(sy)+'%':'Belum tersedia'}. Posisi dengan nilai 11, 13, atau 19 diklasifikasikan sebagai pengecualian pada mesin saat ini.</p>
+ <p><b>Productive:</b> ${counts?counts.productive+' dari 60 posisi (indeks 21–80) = floor('+counts.productive+'/60 × 100) = '+safe(pr)+'%':'Belum tersedia'}. Indeks array tidak boleh otomatis disamakan dengan usia sebelum ada verifikasi pemetaan.</p>
+ <p><b>Momentum:</b> ${raw===null?'Belum tersedia':'Nilai mentah '+safe(fmt(raw))+'; tampilan '+safe(plat.momentum)+'.'} Perhitungan sekarang menggunakan rata-rata bobot 40 posisi (indeks 18–57). Jika nilai mentah melebihi 1, tampilan menjadi +1; nilai mentah tetap disimpan.</p>
+ <p><b>Catatan verifikasi:</b> Bobot setiap nilai Vitranta, rentang posisi, dan aturan klasifikasi positif masih berstatus rekonstruksi. Bandingkan dengan keluaran SCS historis sebelum mengubahnya.</p>
+ </div></details>
  </section>
  <section class="clean-section" aria-label="Interpretasi nama">
  <h3>Interpretasi Nama</h3>

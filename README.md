@@ -1,3 +1,21 @@
+# AVETRA v2.7.1 · Audit Pola
+
+## Perubahan
+- Panel audit perhitungan Vitranta yang dapat dibuka pada halaman Personal.
+- Menampilkan pembilang/penyebut Synergy dan Productive, rentang indeks, serta Momentum mentah dan nilai tampilan.
+- Tidak mengubah formula, bobot, klasifikasi, atau hasil kalkulasi.
+- Mengingatkan bahwa indeks array belum tentu sama dengan usia dan bahwa rumus masih berupa rekonstruksi.
+- Pembaruan versi cache untuk Safari.
+
+## Referensi implementasi saat ini
+- `platinum-aggregate.js`: Synergy 100 posisi; Productive 60 posisi pada indeks 21–80; Momentum 40 posisi pada indeks 18–57.
+- `scs-dictionary.js`: ambang indikator dan klasifikasi Harani bersumber dari kamus rekonstruksi.
+
+## Status pengujian
+- Pemeriksaan sintaks JavaScript dan uji perhitungan otomatis tersedia.
+- Pengujian langsung Safari iPhone dan kesesuaian dengan SCS asli belum selesai.
+
+---
 ## v2.7.0 • Reading Engine tahap 1
 - Interpretasi terstruktur Harani, SV, CV, O:3 dan agregat Vitranta.
 - Perbaikan ruang tombol Hitung dan tombol kembali ke atas di Safari iPhone.
